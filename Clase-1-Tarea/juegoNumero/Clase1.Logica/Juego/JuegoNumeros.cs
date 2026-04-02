@@ -9,6 +9,14 @@ public class JuegoNumeros : IJuegoNumeros
 
     public int Min {get; set;}
     public int Max {get; set;}
+
+    public bool Finalizado {get; set; }
+    
+    public JuegoNumeros(int min, int max)
+    {
+        Min = min;
+        Max = max;
+    }
     public int Generar() => numero.Next(Min, Max);
 
     public string Pista(int numRandom, int numElegido)
@@ -26,6 +34,7 @@ public class JuegoNumeros : IJuegoNumeros
         switch(modulo)
         {
             case 0: respuesta = "Lo conseguiste en " + ++Intentos + " intentos";
+                Finalizado = true;
                 break;
             case <5: respuesta = "CALIENTE!";
                      Intentos++;

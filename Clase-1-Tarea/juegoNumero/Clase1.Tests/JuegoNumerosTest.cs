@@ -5,7 +5,7 @@ public class JuegoNumeroTest
     [Fact]
     public void NoSeGeneraUnNumeroFueraDelRango()
     {
-        var juego = new JuegoNumeros {Min = 1, Max = 2};
+        var juego = new JuegoNumeros (1, 2);
                
         var numero = juego.Generar();
         juego.Pista(numero, 1);
@@ -20,7 +20,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEsMenos3DevuelveCaliente()
     {
-        var juego = new JuegoNumeros {Min = 7, Max = 7};
+        var juego = new JuegoNumeros (7, 7);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -34,7 +34,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEsExactamente4DevuelveCaliente()
     {
-        var juego = new JuegoNumeros {Min = 14, Max = 14};
+        var juego = new JuegoNumeros (14, 14);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -48,7 +48,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEsMenos5DevuelveTibio()
     {
-        var juego = new JuegoNumeros {Min = 5, Max = 5};
+        var juego = new JuegoNumeros (5, 5);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -62,7 +62,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEs19DevuelveTibio()
     {
-        var juego = new JuegoNumeros {Min = 20, Max = 20};
+        var juego = new JuegoNumeros (20, 20);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -76,7 +76,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEsMenos20DevuelveFrio()
     {
-        var juego = new JuegoNumeros {Min = 10, Max = 10};
+        var juego = new JuegoNumeros (10, 10);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -90,7 +90,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEs49DevuelveFrio()
     {
-        var juego = new JuegoNumeros {Min = 50, Max = 50};
+        var juego = new JuegoNumeros (50, 50);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -104,7 +104,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEsMenos50DevuelveCongelado()
     {
-        var juego = new JuegoNumeros {Min = 10, Max = 10};
+        var juego = new JuegoNumeros (10, 10);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -118,7 +118,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiLaDiferenciaEs99DevuelveCongelado()
     {
-        var juego = new JuegoNumeros {Min = 100, Max = 100};
+        var juego = new JuegoNumeros (100, 100);
         
         var numero = juego.Generar();
         juego.Min = 1;
@@ -132,7 +132,7 @@ public class JuegoNumeroTest
     [Fact]
     public void SiNoHayDiferenciaDevuelveAciertoYCantidadDeIntentos()
     {
-        var juego = new JuegoNumeros {Min = 28, Max = 28};
+        var juego = new JuegoNumeros (28, 28);
         
         var numero = juego.Generar();
         juego.Pista(numero, 35);
@@ -144,7 +144,7 @@ public class JuegoNumeroTest
         [Fact]
         public void SiElNumeroElegidoEstaFueraDelRangoDevuelveEquivocado()
     {
-        var juego = new JuegoNumeros {Min = 1, Max = 4};
+        var juego = new JuegoNumeros (1, 4);
         
         var numero = juego.Generar();
         var respuesta = juego.Pista(numero, 5);
