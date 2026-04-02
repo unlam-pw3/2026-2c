@@ -13,7 +13,7 @@ Se separó la lógica del juego del ahorcado en componentes testables y reutiliz
 Tarea propuesta
 ---------------
 
-Crear un nuevo juego en este repositorio cuyo objetivo sea adivinar un número entero secreto (por ejemplo entre 1 y 100). En vez de indicar mayor/menor, el juego debe responder con una de estas pistas: `congelado`, `frio`, `tibio`, `caliente`.
+Crear un nuevo juego en este repositorio cuyo objetivo sea adivinar un número entero secreto (por ejemplo entre 1 y 100). En vez de indicar mayor/menor, el juego debe responder con una de estas pistas: `congelado`, `frio`, `tibio`, `caliente`. Y mostrar en que número de intento lo adivinó.
 
 Comportamiento esperado (ejemplo de reglas):
 
