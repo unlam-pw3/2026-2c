@@ -1,3 +1,5 @@
 <Solution>
   <Project Path="Clase1.Consola/Clase1.Consola.csproj" />
+  <Project Path="Clase1.Logica/Clase1.Logica.csproj" />
+  <Project Path="Clase1.Tests/Clase1.Tests.csproj" />
 </Solution>

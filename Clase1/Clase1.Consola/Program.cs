@@ -1,56 +1,40 @@
-﻿int intentosIniciales = 6;
-int intentos = intentosIniciales;
+﻿using Clase1.Logica.IO;
+using Clase1.Logica.Providers;
+using Clase1.Logica.Juego;
 
-Console.WriteLine("Bienvenido al juego del ahorcado.");
-Console.WriteLine($"Tendras {intentosIniciales} intentos para adivinar la palabra secreta!");
+int intentosIniciales = 6;
 
-//Juego Ahorcado
+IConsola consola = new ConsolaWrapper();
+IProveedorPalabras proveedor = new ProveedorPalabrasEstatico(new[] { "programacion", "consola", "csharp", "desarrollo", "juego" });
 
-// Palabras para el juego
-string[] palabras = { "programacion", "consola", "csharp", "desarrollo", "juego" };
+string palabraSecreta = proveedor.ObtenerPalabraAleatoria();
+IJuegoAhorcado juego = new JuegoAhorcado(palabraSecreta, intentosIniciales);
 
-//Elegir una palabra al azar
-Random rand = new Random();
-string palabraSecreta = palabras.OrderBy(x => rand.Next()).ToArray()[0];
-//Mostrar la cantidad de letras de la palabra
-string palabraOculta = new string('_', palabraSecreta.Length);
-Console.WriteLine();
+consola.EscribirLinea("Bienvenido al juego del ahorcado.");
+consola.EscribirLinea($"Tendras {intentosIniciales} intentos para adivinar la palabra secreta!");
+consola.EscribirLinea();
 
-do
+while (juego.IntentosRestantes > 0 && !juego.IsGanado)
 {
-    Console.WriteLine(palabraOculta.Replace("_", " _"));
-    //Pedir al usuario que ingrese una letra
-    char letraIngresada = Console.ReadKey().KeyChar;
-    Console.WriteLine();
+    consola.EscribirLinea(juego.PalabraEnmascarada.Replace("_", " _"));
+    char letra = consola.LeerTecla();
+    consola.EscribirLinea();
 
-    // Verificar si la letra está en la palabra
-    if (palabraSecreta.Contains(letraIngresada))
+    bool acierto = juego.Adivinar(letra);
+    if (!acierto)
     {
-        // Mostrar la letra en su posición correspondiente
-        for (int i = 0; i < palabraSecreta.Length; i++)
-        {
-            if (palabraSecreta[i] == letraIngresada)
-            {
-                palabraOculta = palabraOculta.Remove(i, 1).Insert(i, letraIngresada.ToString());
-            }
-        }
-    }
-    else
-    {
-        // Restar un intento
-        Console.WriteLine("Letra incorrecta. Intentos restantes: " + (--intentos));
+        consola.EscribirLinea("Letra incorrecta. Intentos restantes: " + juego.IntentosRestantes);
     }
 }
-while (intentos > 0 && palabraOculta.Contains('_'));
 
-Console.WriteLine();
-if (palabraOculta.Contains('_'))
+consola.EscribirLinea();
+if (!juego.IsGanado)
 {
-    Console.WriteLine($"GAME OVER. Se han utilizado todos los {intentosIniciales} intentos...");
+    consola.EscribirLinea($"GAME OVER. Se han utilizado todos los {intentosIniciales} intentos...");
 }
 else
 {
-    Console.WriteLine("¡Felicidades! Has adivinado la palabra: " + palabraSecreta);
+    consola.EscribirLinea("¡Felicidades! Has adivinado la palabra: " + palabraSecreta);
 }
 
 
