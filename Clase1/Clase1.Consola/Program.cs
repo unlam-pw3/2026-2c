@@ -1,13 +1,14 @@
 ﻿using Clase1.Logica.IO;
 using Clase1.Logica.Providers;
-using Clase1.Logica.Juego;
+using Clase1.Logica.Juego; //los famosos import en java seria (import {nombre del package})
 
 int intentosIniciales = 6;
 
-IConsola consola = new ConsolaWrapper();
-IProveedorPalabras proveedor = new ProveedorPalabrasEstatico(new[] { "programacion", "consola", "csharp", "desarrollo", "juego" });
+IConsola consola = new ConsolaWrapper(); //Se crea una instancia de la clase ConsolaWrappper (un objeto), que implementa IConsola
 
+IProveedorPalabras proveedor = new ProveedorPalabrasEstatico(new[] { "programacion", "consola", "csharp", "desarrollo", "juego" });
 string palabraSecreta = proveedor.ObtenerPalabraAleatoria();
+
 IJuegoAhorcado juego = new JuegoAhorcado(palabraSecreta, intentosIniciales);
 
 consola.EscribirLinea("Bienvenido al juego del ahorcado.");

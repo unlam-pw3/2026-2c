@@ -15,7 +15,7 @@ namespace Clase1.Logica.Juego
         public IReadOnlyCollection<char> LetrasAdivinadas => letrasAdivinadas;
 
         // Devuelve la palabra con '_' en las letras no adivinadas
-        public string PalabraEnmascarada => new string(palabraSecreta.Select(c => letrasAdivinadas.Contains(c) ? c : '_').ToArray());
+        public string PalabraEnmascarada => new string(palabraSecreta.Select(c => letrasAdivinadas.Contains(c) ? c : '_').ToArray()); //palabraSecreta.Select(c => letrasAdivinadas.Contains(c) ? c : '_').ToArray()) = por cada caracter (c) de palabraSecreta si letrasAdivinadas.Contains(c) se muestra el caracter sino un "_" despues .ToArray lo convierte a un array de chars y new String lo convierte a un String (la palabra enmascarada) reemplazando las letras no adivinadas por "_"
 
         public bool IsGanado => !PalabraEnmascarada.Contains('_');
         public bool IsPerdido => IntentosRestantes <= 0 && !IsGanado;
