@@ -2,152 +2,162 @@
 
 public class JuegoNumeroTest
 {
+    // genero y testeo varias veces para evaluar que no se genere un random fuera de rango
     [Fact]
     public void NoSeGeneraUnNumeroFueraDelRango()
     {
-        var juego = new JuegoNumeros (1, 2);
+        const int min = 1;
+        const int max = 50;
+        var juego = new JuegoNumeros (min, max);
                
-        var numero = juego.Generar();
-        juego.Pista(numero, 1);
+        var numero1 = juego.Generar();
+        Assert.InRange(numero1, min, max);
         
-        Assert.InRange(numero, 1, 2);
-        Assert.InRange(numero, 1, 2);
-        Assert.InRange(numero, 1, 2);
-        Assert.InRange(numero, 1, 2);
-        Assert.InRange(numero, 1, 2);
+        var numero2 = juego.Generar();
+        Assert.InRange(numero2, min, max);
+        var numero3 = juego.Generar();
+        Assert.InRange(numero3, min, max);
+        var numero4 = juego.Generar();
+        Assert.InRange(numero4, min, max);
+        var numero5 = juego.Generar();
+        Assert.InRange(numero5, min, max);
+        var numero6 = juego.Generar();
+        Assert.InRange(numero6, min, max);
     }
 
     [Fact]
     public void SiLaDiferenciaEsMenos3DevuelveCaliente()
     {
-        var juego = new JuegoNumeros (7, 7);
-        
+        var juego = new JuegoNumeros (1, 100);
+        // genero para definir los valores limites
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 10);
+        // fuerzo el valor del numero random para poder testear
+        juego.NumeroRandom = 7;
+        var respuesta = juego.Pista(10);
 
-        Assert.Equal(7, numero);
         Assert.Equal("CALIENTE!", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEsExactamente4DevuelveCaliente()
     {
-        var juego = new JuegoNumeros (14, 14);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(14, 10);
+        juego.NumeroRandom = 14;
 
-        Assert.Equal(14, numero);
+        var respuesta = juego.Pista(10);
+
         Assert.Equal("CALIENTE!", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEsMenos5DevuelveTibio()
     {
-        var juego = new JuegoNumeros (5, 5);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 10);
+        juego.NumeroRandom = 5;
+        
+        var respuesta = juego.Pista(10);
 
-        Assert.Equal(5, numero);
         Assert.Equal("Tibio Tibio", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEs19DevuelveTibio()
     {
-        var juego = new JuegoNumeros (20, 20);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 1);
+        juego.NumeroRandom = 20;
+        
+        var respuesta = juego.Pista(1);
 
-        Assert.Equal(20, numero);
         Assert.Equal("Tibio Tibio", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEsMenos20DevuelveFrio()
     {
-        var juego = new JuegoNumeros (10, 10);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 30);
+        juego.NumeroRandom = 10;
+        
+        var respuesta = juego.Pista(30);
 
-        Assert.Equal(10, numero);
         Assert.Equal("Friiiiio", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEs49DevuelveFrio()
     {
-        var juego = new JuegoNumeros (50, 50);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 1);
+        juego.NumeroRandom = 50;
+        
+        var respuesta = juego.Pista(1);
 
-        Assert.Equal(50, numero);
         Assert.Equal("Friiiiio", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEsMenos50DevuelveCongelado()
     {
-        var juego = new JuegoNumeros (10, 10);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 60);
+        juego.NumeroRandom = 10;
+        
+        var respuesta = juego.Pista(60);
 
-        Assert.Equal(10, numero);
         Assert.Equal("En el freezer", respuesta);
     }
 
     [Fact]
     public void SiLaDiferenciaEs99DevuelveCongelado()
     {
-        var juego = new JuegoNumeros (100, 100);
-        
+        var juego = new JuegoNumeros (1, 100);
         var numero = juego.Generar();
-        juego.Min = 1;
-        juego.Max = 100;
-        var respuesta = juego.Pista(numero, 1);
+        juego.NumeroRandom = 100;
+        
+        var respuesta = juego.Pista(1);
 
-        Assert.Equal(100, numero);
         Assert.Equal("En el freezer", respuesta);
     }
 
+    // quiza seria conveniente separar este test?
     [Fact]
     public void SiNoHayDiferenciaDevuelveAciertoYCantidadDeIntentos()
     {
-        var juego = new JuegoNumeros (28, 28);
+        var juego = new JuegoNumeros (1, 100);
+        juego.NumeroRandom = 28;
         
-        var numero = juego.Generar();
-        juego.Pista(numero, 35);
-        var respuesta = juego.Pista(numero, 28);
+        // juego dos veces, pero solo guardo la segunda para el test
+        juego.Pista(35);
+        var respuesta = juego.Pista(28);
 
         Assert.Equal("Lo conseguiste en 2 intentos", respuesta);
+    }
+
+    [Fact]
+    public void ContabilizaCorrectamenteLosIntentosEnTodosLosEscenarios()
+    {
+        var juego = new JuegoNumeros (1, 100);
+        juego.NumeroRandom = 88;
+        
+        juego.Pista(1);
+        juego.Pista(20);
+        juego.Pista(50);
+        juego.Pista(120);
+        juego.Pista(88);
+
+        Assert.Equal(5, juego.Intentos);
     }
 
         [Fact]
         public void SiElNumeroElegidoEstaFueraDelRangoDevuelveEquivocado()
     {
         var juego = new JuegoNumeros (1, 4);
-        
-        var numero = juego.Generar();
-        var respuesta = juego.Pista(numero, 5);
+        juego.Generar();
+
+        var respuesta = juego.Pista(5);
 
         Assert.Equal("No existe el 5, señor", respuesta);
     }

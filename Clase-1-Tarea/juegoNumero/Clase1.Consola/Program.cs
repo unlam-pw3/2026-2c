@@ -14,21 +14,23 @@ consola.Escribir("Ahora ingresa el número máximo que se puede generar:");
 int max = consola.EscribirNumero();
 consola.EscribirLinea();
 
+// paso los valores maximos y minimos
 IJuegoNumeros juego = new JuegoNumeros(min, max);
-int numeroSecreto = juego.Generar();
+// genero el numero random
+juego.Generar();
 
 consola.EscribirLinea();
 consola.EscribirLinea("Ahora intenta adivinar el número");
 
-string respuesta = "";
-
+// mientras no esta finaliza, continua el juego. finaliza dentro del loop, y en la proxima ejecucion salta
 while (!juego.Finalizado) 
 {
 consola.Escribir("Que número estas pensando? ");
 int numeroElegido = consola.EscribirNumero();
-respuesta = juego.Pista(numeroSecreto, numeroElegido);
+string respuesta = juego.Pista(numeroElegido);
 consola.EscribirLinea(respuesta);
 }  
 
+// informa juego finalizado
 consola.EscribirLinea();
 consola.Escribir("Juego Finalizado");
