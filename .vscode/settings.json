@@ -1,4 +1,0 @@
-{
-  "editor.acceptSuggestionOnEnter": "smart", // "on" o "smart" solo para casos claros
-  "editor.acceptSuggestionOnCommitCharacter": false
-}
