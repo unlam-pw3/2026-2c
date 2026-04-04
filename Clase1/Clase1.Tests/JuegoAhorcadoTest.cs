@@ -112,4 +112,6 @@ public class JuegoAhorcadoTest
         Assert.True(juego.IsPerdido);
         Assert.False(juego.IsGanado);
     }
+
+
 }
