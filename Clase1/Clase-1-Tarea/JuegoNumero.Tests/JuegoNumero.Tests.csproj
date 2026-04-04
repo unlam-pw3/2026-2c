@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clase1.Logica\Clase1.Logica.csproj" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\JuegoNumero.Logica\JuegoNumero.Logica.csproj" />
   </ItemGroup>
 
 </Project>
