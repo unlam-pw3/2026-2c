@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Clase-1-Tarea/">
+    <Project Path="Clase1Tarea.Logica/Clase1Tarea.Logica.csproj" Id="763b8611-8fec-4308-b9b3-70e3c35e4aa9" />
+    <Project Path="Clase1Tarea.Tests/Clase1Tarea.Tests.csproj" Id="957cad4b-f212-4175-a9c5-240746fbf8bc" />
+    <Project Path="Clase1Tarea/Clase1Tarea.Consola.csproj" Id="d3174526-716f-46a6-8743-27e7e9a73de9" />
+  </Folder>
   <Project Path="Clase1.Consola/Clase1.Consola.csproj" />
   <Project Path="Clase1.Logica/Clase1.Logica.csproj" />
   <Project Path="Clase1.Tests/Clase1.Tests.csproj" />
