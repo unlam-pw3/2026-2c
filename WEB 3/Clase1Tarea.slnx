@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Clase1.Logica.Numero.Tests/Clase1.Logica.Numero.Tests.csproj" />
+  <Project Path="Clase1.Logica.Numero/Clase1.Logica.Numero.csproj" />
+  <Project Path="JuegoNumero.App/JuegoNumero.App.csproj" />
+</Solution>
