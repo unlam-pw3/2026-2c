@@ -1,60 +1,35 @@
-﻿
-//Juego adivinar el numero
-int intentos = 0;
-//Elegir un numero aleatorio
+﻿using Clase1Tarea.Logica.IO;
+using Clase1Tarea.Logica.Juego;
 
-int numeroMinimoInclusive = 1;
-int numeroMaximoInclusive = 100;
+IConsola consola = new ConsolaWrapper();
 
-int numeroAleatorio = new Random().Next(numeroMinimoInclusive, numeroMaximoInclusive + 1);
-
+int numeroAleatorio = new Random().Next(1, 101);
 int numeroIngresado = 0;
-int distancia = 0;
 
+IJuegoNumero juegoNumero = new JuegoNumero(numeroAleatorio);
 
-while (numeroIngresado != numeroAleatorio)
+consola.EscribirLinea("Bienvenido al juego de adivinar el número.");
+consola.EscribirLinea("Tendras intentos ilimitados para adivinar el número secreto!");
+consola.EscribirLinea();
+
+while (!juegoNumero.HaGanado)
 {
     //Pedir al usuario que ingrese un numero
-    Console.WriteLine("Ingrese un numero");
-    numeroIngresado = Convert.ToInt32(Console.ReadLine());
+    consola.EscribirLinea("Ingrese un número");
+    numeroIngresado = Convert.ToInt32(consola.LeerLinea());
 
     //Verificar si el numero esta en el rango.
-    if (numeroIngresado < numeroMinimoInclusive || numeroIngresado > numeroMaximoInclusive)
+    if (!juegoNumero.VerificarNumero(numeroIngresado))
     {
-        Console.WriteLine("Elija un número entre " + (numeroMinimoInclusive) + " y " + (numeroMaximoInclusive));
+        consola.EscribirLinea("Elija un número entre 1 y 100");
         continue;
     }
 
-    intentos++;
+    string resultado = juegoNumero.Adivinar(numeroIngresado);
+    consola.EscribirLinea(resultado);
 
-    distancia = numeroAleatorio - numeroIngresado;
-    if (distancia < 0)
+    if (juegoNumero.HaGanado)
     {
-        distancia = distancia * -1;
+        consola.EscribirLinea("Lo lograste en " + juegoNumero.Intentos + " intentos!");
     }
-
-    if (numeroIngresado == numeroAleatorio)
-    {
-        Console.WriteLine("Ganaste! con " + (intentos) + " intentos" );
-    } else if (distancia >= 50)
-    {
-        Console.WriteLine("Congelado");
-    } else if (distancia >=20 && distancia < 50)
-    {
-        Console.WriteLine("Frio");
-    } else if (distancia >= 5 && distancia < 20)
-    {
-        Console.WriteLine("Tibio");
-    } else if (distancia < 5)
-    {
-        Console.WriteLine("Caliente");
-    }
-
 }
-
-
-//Si el numero ingresado es menor o mayor al numero aleatorio, informar al usuario que tan lejos o cerca esta.
-
-//Si el numero ingresado es el aleatorio, felicitar al usuario y mostrar el numero de intentos. 
-
-//Repetir el proceso hasta que el usuario adivine el numero.
