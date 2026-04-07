@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="../Clase1/Clase1.Logica/Clase1.Logica.csproj" />
+  <Project Path="Clase-1-Tarea/Clase-1-Tarea.csproj" />
+  <Project Path="JuegoNumero/JuegoNumero.csproj" />
+  <Project Path="JuegoNumeroTests/JuegoNumeroTests.csproj" Id="05b2a41d-9aab-408f-94f3-c3ddfdd6d524" />
+  <Project Path="Tests/Tests.csproj" Id="a145e938-ac51-4df5-bfd3-37f104ef2d51" />
+</Solution>
