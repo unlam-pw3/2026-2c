@@ -1,77 +1,38 @@
-﻿Console.WriteLine("Bienvenido a la Tarea de la clase 1. Vas a adivinar un numero entre el 1 y el 100 /n " +
-    "Luego de ingresar su numero presiona una letra cualquiera!");
+﻿using Clase_1_Tarea_.IO;
+using Clase_1_Tarea_.Juego;
+using Clase_1_Tarea_.Providers;
 
-//Generear un bumero random 1- 100 (Entero)
+IConsola consola = new IConsolaWrapper();
+consola.EscribirLinea("Bienvenido a la Tarea de la clase 1. Vas a adivinar un numero entre el 1 y el 100");
 
-int numeroRandom = new Random().Next(1, 101);
+IProveedorNumeros proveedorNumeros = new IProveedorNumerosWrapper();
 
-//Usuario ingresa su numero //(Se debe usar el enter tambien)
+IJuegoAdivinarNumero juego = new JuegoAdivinarNumero();
+juego.Inicializar(1, 100, proveedorNumeros);
 
-bool adivino = false;
-
-do
+bool terminado = false;
+while (!terminado)
 {
-
-    int numeroDelUsuario;
-    List<char> numerosIngresados = new List<char>();
-    char input;
-    do
+    consola.Escribir("Ingresa un número: ");
+    string entrada = consola.LeerLinea();
+    if (!int.TryParse(entrada, out int intento))
     {
-        input = Console.ReadKey().KeyChar;
-        if (numerosIngresados.Count > 3)
-        {
-            break;
-        }
-        if (char.IsDigit(input))
-        {
-            numerosIngresados.Add(input);
-        }
-        else
-        {
-            break;
-        }
-    } while (char.IsDigit(input));
-
-    //Convertir la lista de caracteres a un numero entero
-
-    numeroDelUsuario = int.Parse(new string(numerosIngresados.ToArray()));
-
-    //Se compara el numero del usuario con el numero random
-
-    int diferencia = Math.Abs(numeroDelUsuario - numeroRandom);
-
-    //En caso de adivinar el numero, se le felicita al usuario y se repite el juego
-
-    if (diferencia == 0)
-    {
-        Console.WriteLine("¡Felicidades! Has adivinado el número.");
+        consola.EscribirLinea("Entrada inválida. Intenta de nuevo.");
+        continue;
     }
 
-    String palabraPista = obtenerLaPalabraPista(diferencia);
-
-    Console.Write(palabraPista);
-
-} while (adivino == false);
-
-Console.WriteLine($"El numero random era: {numeroRandom}");
-
-static String obtenerLaPalabraPista(int num)
-{
-    String palabra = "";
-    switch (num)
+    var resultado = juego.Evaluar(intento);
+    if (resultado.Adivino)
     {
-        case >= 50:
-            palabra = "congelado";
-            break;
-        case >= 20 and < 50:
-            palabra = "frio";
-            break;
-        case >= 5 and < 20:
-            palabra = "tibio";
-            break;
-        case < 5:
-            palabra = "caliente";
-            break;
+        consola.EscribirLinea($"¡Felicidades! Adivinaste en {juego.Intentos} intentos.");
+        terminado = true;
     }
-    return palabra; 
-};
+    else
+    {
+        consola.EscribirLinea($"Pista: {resultado.Pista}");
+    }
+}
+
+consola.EscribirLinea($"El número era: {juego.NumeroObjetivo}");
+consola.EscribirLinea("Gracias por jugar. Presiona ENTER para salir.");
+consola.LeerLinea();
