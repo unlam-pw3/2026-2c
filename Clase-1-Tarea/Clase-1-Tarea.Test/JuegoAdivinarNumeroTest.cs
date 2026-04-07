@@ -3,9 +3,12 @@
     [TestClass]
     public sealed class JuegoAdivinarNumeroTest
     {
+        //Tests unitarios 
         [TestMethod]
         public void Al_Adivinar_El_Numero_Correctamente_Gano()
         {
+            //Clase Mock al final de la clase. 
+            //El numero random es el del constructor.
             var proveedor = new FixedProveedor(42);
             var juego = new Clase_1_Tarea_.Juego.JuegoAdivinarNumero();
             juego.Inicializar(1, 100, proveedor);

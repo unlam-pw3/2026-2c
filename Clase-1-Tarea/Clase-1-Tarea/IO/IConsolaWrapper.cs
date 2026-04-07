@@ -4,6 +4,7 @@ namespace Clase_1_Tarea_.IO
 {
     public class IConsolaWrapper : IConsola
     {
+        //Consola Wrapper. 
         public void EscribirLinea(string texto)
         {
             Console.WriteLine(texto);
