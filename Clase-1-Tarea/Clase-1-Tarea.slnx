@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Clase-1-Tarea.Consola/Clase-1-Tarea.Consola.csproj" />
+  <Project Path="Clase-1-Tarea.Test/Clase-1-Tarea.Test.csproj" Id="f4fbc650-07f5-4d17-be08-8ba0562e6ae7" />
+  <Project Path="Clase-1-Tarea/Clase-1-Tarea.Logica.csproj" Id="58ef19d2-b26c-4686-ad91-fcee04aad5dc" />
+</Solution>
