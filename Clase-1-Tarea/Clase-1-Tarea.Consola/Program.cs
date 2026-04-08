@@ -24,7 +24,9 @@ while (!terminado)
         continue;
     }
     //Si es valido, se evalua el numero. Si es correcto el juego termina
-    var (adivino, pista)  = juego.Evaluar(intento);
+    bool adivino;
+    var pista = juego.Evaluar(intento, out adivino); 
+
     if (adivino)
     {
         consola.EscribirLinea($"¡Felicidades! Adivinaste en {juego.Intentos} intentos.");
@@ -41,3 +43,9 @@ while (!terminado)
 consola.EscribirLinea($"El número era: {juego.NumeroObjetivo}");
 consola.EscribirLinea("Gracias por jugar. Presiona ENTER para salir.");
 consola.LeerLinea();
+
+/*
+    Duda: Cuales son las diferencias entre tuple y out/ref
+        var (adivino, pista)  = juego.Evaluar(intento);
+        public (bool Adivino, string Pista) Evaluar(int intento)
+ */

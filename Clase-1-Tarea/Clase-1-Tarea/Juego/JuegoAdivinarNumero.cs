@@ -27,18 +27,12 @@ namespace Clase_1_Tarea_.Juego
         }
 
         //Evalua el numero ingresado, retorna si es correcto y una pista acorde a la diferencia
-        public (bool Adivino, string Pista) Evaluar(int intento)
+        public String Evaluar(int intento, out bool adivino)
         {
-            this.intentos = this.intentos + 1;
-            int diferencia = Math.Abs(intento - this.numeroObjetivo);
-            String pista = getPista(diferencia);
-            if(diferencia == 0)
-            {
-                return (true, pista);
-            } else
-            {
-                return (false, pista); 
-            }
+            this.intentos++;
+            int diferencia = Math.Abs(this.numeroObjetivo - intento);
+            adivino = (diferencia == 0);
+            return getPista(diferencia);
         }
 
         //Retorna la pista segun la diferencia. 
