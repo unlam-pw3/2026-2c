@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AdivinaElNumero/JuegoNumero.csproj" />
+  <Project Path="TestJuegoNumero/TestJuegoNumero.csproj" />
+</Solution>
