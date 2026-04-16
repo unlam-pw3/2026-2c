@@ -1,4 +1,9 @@
 <Solution>
+  <Folder Name="/Clase-1-Tarea-Juego-adivinanza/">
+    <Project Path="Clase-1-Tarea-juego-adivinanza/Tarea.Logica.csproj" Id="19628051-1cf6-4eec-ac01-c8d0073c0a02" />
+    <Project Path="Tarea.Consola/Tarea.Consola.csproj" Id="540c37a6-8144-4649-93a6-ce8d4c3bcb5b" />
+    <Project Path="Tarea.Test/Tarea.Test.csproj" Id="c7be089d-551b-461b-9c2a-395b9d1d3666" />
+  </Folder>
   <Project Path="Clase1.Consola/Clase1.Consola.csproj" />
   <Project Path="Clase1.Logica/Clase1.Logica.csproj" />
   <Project Path="Clase1.Tests/Clase1.Tests.csproj" />
