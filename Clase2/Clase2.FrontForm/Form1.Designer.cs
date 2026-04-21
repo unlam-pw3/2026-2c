@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ComboBox cbxDiasSolicitados;
             grpLicencias = new GroupBox();
             label1 = new Label();
             txtTipoLicencia = new TextBox();
@@ -39,25 +38,17 @@
             txtEmpleado = new TextBox();
             lblEmpleado = new Label();
             btnRegistrar = new Button();
-            dataGridView1 = new DataGridView();
+            dgvlicencias = new DataGridView();
             TipoLicencia = new DataGridViewTextBoxColumn();
             NombreEmpleado = new DataGridViewTextBoxColumn();
             Area = new DataGridViewTextBoxColumn();
             CantidadDeDias = new DataGridViewTextBoxColumn();
+            btnConsultar = new Button();
             cbxDiasSolicitados = new ComboBox();
             grpLicencias.SuspendLayout();
             grpEmpleados.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvlicencias).BeginInit();
             SuspendLayout();
-            // 
-            // cbxDiasSolicitados
-            // 
-            cbxDiasSolicitados.FormattingEnabled = true;
-            cbxDiasSolicitados.Items.AddRange(new object[] { "1 Día", "7 Días", "14 Días", "21 Días" });
-            cbxDiasSolicitados.Location = new Point(153, 82);
-            cbxDiasSolicitados.Name = "cbxDiasSolicitados";
-            cbxDiasSolicitados.Size = new Size(125, 23);
-            cbxDiasSolicitados.TabIndex = 3;
             // 
             // grpLicencias
             // 
@@ -72,6 +63,15 @@
             grpLicencias.TabStop = false;
             grpLicencias.Text = "Licencias";
             grpLicencias.Enter += groupBox1_Enter;
+            // 
+            // cbxDiasSolicitados
+            // 
+            cbxDiasSolicitados.FormattingEnabled = true;
+            cbxDiasSolicitados.Items.AddRange(new object[] { "1 Dia", "7 Dias", "14 Dias", "21 Dias" });
+            cbxDiasSolicitados.Location = new Point(153, 82);
+            cbxDiasSolicitados.Name = "cbxDiasSolicitados";
+            cbxDiasSolicitados.Size = new Size(125, 23);
+            cbxDiasSolicitados.TabIndex = 3;
             // 
             // label1
             // 
@@ -157,15 +157,16 @@
             btnRegistrar.TabIndex = 2;
             btnRegistrar.Text = "Registrar";
             btnRegistrar.UseVisualStyleBackColor = true;
+            btnRegistrar.Click += btnRegistrar_Click;
             // 
-            // dataGridView1
+            // dgvlicencias
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { TipoLicencia, NombreEmpleado, Area, CantidadDeDias });
-            dataGridView1.Location = new Point(24, 200);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(635, 189);
-            dataGridView1.TabIndex = 3;
+            dgvlicencias.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvlicencias.Columns.AddRange(new DataGridViewColumn[] { TipoLicencia, NombreEmpleado, Area, CantidadDeDias });
+            dgvlicencias.Location = new Point(24, 200);
+            dgvlicencias.Name = "dgvlicencias";
+            dgvlicencias.Size = new Size(635, 189);
+            dgvlicencias.TabIndex = 3;
             // 
             // TipoLicencia
             // 
@@ -189,12 +190,23 @@
             CantidadDeDias.HeaderText = "Cantidad De Dias";
             CantidadDeDias.Name = "CantidadDeDias";
             // 
+            // btnConsultar
+            // 
+            btnConsultar.Location = new Point(339, 144);
+            btnConsultar.Name = "btnConsultar";
+            btnConsultar.Size = new Size(309, 42);
+            btnConsultar.TabIndex = 4;
+            btnConsultar.Text = "Consultar";
+            btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += btnConsultar_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(692, 423);
-            Controls.Add(dataGridView1);
+            Controls.Add(btnConsultar);
+            Controls.Add(dgvlicencias);
             Controls.Add(btnRegistrar);
             Controls.Add(grpEmpleados);
             Controls.Add(grpLicencias);
@@ -205,7 +217,7 @@
             grpLicencias.PerformLayout();
             grpEmpleados.ResumeLayout(false);
             grpEmpleados.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvlicencias).EndInit();
             ResumeLayout(false);
         }
 
@@ -223,10 +235,11 @@
         private ComboBox cbxDepartamento;
         private Label lblDepa;
         private Button btnRegistrar;
-        private DataGridView dataGridView1;
+        private DataGridView dgvlicencias;
         private DataGridViewTextBoxColumn TipoLicencia;
         private DataGridViewTextBoxColumn NombreEmpleado;
         private DataGridViewTextBoxColumn Area;
         private DataGridViewTextBoxColumn CantidadDeDias;
+        private Button btnConsultar;
     }
 }
