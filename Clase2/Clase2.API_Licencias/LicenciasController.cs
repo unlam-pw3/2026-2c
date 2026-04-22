@@ -11,7 +11,7 @@ namespace Clase2.API_Licencias
         ILicenciaService _LicenciaServicio;
 
         public LicenciasController(ILicenciaService licenciaService)
-        {
+        {   
             _LicenciaServicio = licenciaService;
         }
 
@@ -28,5 +28,6 @@ namespace Clase2.API_Licencias
             var licencias = _LicenciaServicio.ObtenerLicencias();
             return Ok(licencias);
         }
+
     }
 }

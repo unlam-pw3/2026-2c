@@ -6,6 +6,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<Clase2.Servicio.ILicenciaService, Clase2.Servicio.LicenciaService>();
+builder.Services.AddSingleton<Clase2.Servicio.IEmpleadoService, Clase2.Servicio.EmpleadoService>();
 
 var app = builder.Build();      
 

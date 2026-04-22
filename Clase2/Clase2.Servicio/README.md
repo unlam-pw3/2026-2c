@@ -2,14 +2,18 @@
 
 ## Descripción
 
-Capa de servicio con la lógica de negocio básica del sistema de licencias.
+Capa de servicios con lógica de negocio en memoria para licencias y empleados.
 
 ## Componentes
 
-- `ILicenciaService`: contrato de operaciones.
-- `LicenciaService`: implementación en memoria usando una lista de licencias.
+- `ILicenciaService` / `LicenciaService`
+  - registrar licencias.
+  - obtener licencias.
+- `IEmpleadoService` / `EmpleadoService`
+  - registrar empleados.
+  - obtener empleados.
 
 ## Responsabilidad
 
-Recibir solicitudes desde la API para registrar y recuperar licencias.
+Centralizar las operaciones que usan los controladores de API y mantener los datos en listas en memoria durante la ejecución.
 

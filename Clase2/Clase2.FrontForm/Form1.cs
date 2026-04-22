@@ -14,11 +14,6 @@ namespace Clase2.FrontForm
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
@@ -47,7 +42,7 @@ namespace Clase2.FrontForm
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
             string tipoLicencia = txtTipoLicencia.Text;
-            string nombreEmpleado = txtEmpleado.Text;
+            string nombreEmpleado = cbxEmpleados.SelectedItem.ToString();
             string area = cbxDepartamento.SelectedItem.ToString();
             string cantidadDias = cbxDiasSolicitados.SelectedItem.ToString();
 
@@ -60,8 +55,6 @@ namespace Clase2.FrontForm
             };
 
             enviarResultadoApi(licencia);
-
-
 
             limpiarControles();
         }
@@ -92,13 +85,13 @@ namespace Clase2.FrontForm
         {
             using (HttpClient client = new HttpClient())
             {
-               try
+                try
                 {
                     var response = await client.GetAsync("https://localhost:7044/api/licencias");
                     if (response.IsSuccessStatusCode)
                     {
                         string jsonResponse = await response.Content.ReadAsStringAsync();
-                       var licencias = System.Text.Json.JsonSerializer.Deserialize<List<Licencia>>(jsonResponse, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        var licencias = System.Text.Json.JsonSerializer.Deserialize<List<Licencia>>(jsonResponse, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
                         dgvlicencias.Rows.Clear();
 
@@ -111,16 +104,19 @@ namespace Clase2.FrontForm
                     {
                         MessageBox.Show("Error al obtener datos de la API");
                     }
-                } catch (HttpRequestException ex) {    
-                        MessageBox.Show("Error al obtener datos de la API: " + ex.Message);     
-                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show("Error al obtener datos de la API: " + ex.Message);
+                }
             }
 
         }
 
         private async Task enviarResultadoApi(Licencia licencia)
         {
-            using(HttpClient client = new HttpClient()) {
+            using (HttpClient client = new HttpClient())
+            {
                 try
                 {
                     var jsonContent = System.Text.Json.JsonSerializer.Serialize(licencia);
@@ -136,9 +132,120 @@ namespace Clase2.FrontForm
                     }
 
                 }
-                catch (HttpRequestException ex) {
-                        MessageBox.Show("Error al registrar licencia en la API: " + ex.Message);
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show("Error al registrar licencia en la API: " + ex.Message);
+                }
             }
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxEmpleado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistrarEmpleado_Click(object sender, EventArgs e)
+        {
+            string nombreEmpleado = txtEmpleado.Text;
+            string correo = txtCorreo.Text;
+            string dni = txtDni.Text;
+            string departamento = cbxDepartamento.SelectedItem.ToString();
+
+            Empleado empleado = new Empleado
+            {
+                Nombre = nombreEmpleado,
+                Correo = correo,
+                Dni = dni,
+                Departamento = departamento
+            };  
+            enviarEmpleadoApi(empleado);
+
+        }
+
+        private async Task enviarEmpleadoApi(Empleado empleado)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var jsonContent = System.Text.Json.JsonSerializer.Serialize(empleado);
+                    var content = new StringContent(jsonContent, System.Text.Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync("https://localhost:7044/api/empleados", content);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Empleado registrado exitosamente en la API");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al registrar empleado en la API");
+                    }
+
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show("Error al registrar licencia en la API: " + ex.Message);
+                }
+            }
+        }
+
+        private void cargarCombo(Empleado empleado)
+        {
+            cbxEmpleados.Items.Add(empleado.Nombre);
+        }
+        private async Task obtenerEmpleadosApi()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync("https://localhost:7044/api/empleados");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonResponse = await response.Content.ReadAsStringAsync();
+                        var empleados = System.Text.Json.JsonSerializer.Deserialize<List<Empleado>>(jsonResponse, new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                        cbxEmpleados.Items.Clear();
+
+                        foreach (var empleado in empleados)
+                        {
+                            cargarCombo(empleado);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error al obtener datos de la API");
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show("Error al obtener datos de la API: " + ex.Message);
+                }
+            }
+
+        }
+
+        private void btnCargarEmpleados_Click(object sender, EventArgs e)
+        {
+            obtenerEmpleadosApi();
+        }
+
+        private void txtTipoLicencia_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

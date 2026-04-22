@@ -4,11 +4,20 @@
 
 Proyecto de entidades compartidas del sistema.
 
-## Modelo principal
+## Modelos
 
-- `Licencia`: representa los datos de una licencia (tipo, empleado, área y cantidad de días).
+- `Licencia`
+  - `TipoLicencia`
+  - `NombreEmpleado`
+  - `Area`
+  - `CantidadDias`
+- `Empleado`
+  - `Nombre`
+  - `Dni`
+  - `Correo`
+  - `Departamento`
 
 ## Responsabilidad
 
-Definir estructuras de datos comunes para que las capas `FrontForm`, `Servicio` y `API` usen el mismo modelo.
+Definir estructuras de datos comunes para que `FrontForm`, `Servicio` y `API` trabajen con los mismos contratos.
 
