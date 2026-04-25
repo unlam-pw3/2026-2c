@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Crear Herramienta";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Crear" method="post">
+   <label>Descripcion</label>
+   <input type="text" name="Descripcion" />
+   <label>Precio</label>
+   <input type="text" name="Precio" />
+   <label>Imagen</label>
+   <input type="text" name="Imagen" />
+   <button type="submit">Crear</button>
+</form>

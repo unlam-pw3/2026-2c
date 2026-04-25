@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Herramientas";
+}
+
+<h1>Bienvenido A Ferreteria EL FERRETERO</h1>
+
+<a class="btn btn-primary" asp-action="Crear">Crear Herramienta</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descripcion</th> <th>Precio</th> <th>Imagen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var herramienta in Model)
+        {
+            <tr>
+                <td>@herramienta.Descripcion</td> <a> 
+                <td>@herramienta.Precio</td>
+                <td><img src="@herramienta.Imagen" alt="@herramienta.Descripcion" width="100px" /></td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@herramienta.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
