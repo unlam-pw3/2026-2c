@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Clase3.Entidad\Clase3.Entidad.csproj" />
+    <ProjectReference Include="..\Clase3.Servicio\Clase3.Servicio.csproj" />
+  </ItemGroup>
+
+</Project>

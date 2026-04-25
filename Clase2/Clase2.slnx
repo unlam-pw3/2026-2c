@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Clase2.API_Licencias/Clase2.API_Licencias.csproj" Id="f01b6291-5a10-4604-9275-c60fff16d527" />
+  <Project Path="Clase2.Entidad/Clase2.Entidad.csproj" Id="4da620f7-acd2-4e86-ac6d-504a357a802f" />
+  <Project Path="Clase2.FrontForm/Clase2.FrontForm.csproj" />
+  <Project Path="Clase2.Servicio/Clase2.Servicio.csproj" Id="90a0f5af-b858-4562-b550-3efb4928d561" />
+</Solution>

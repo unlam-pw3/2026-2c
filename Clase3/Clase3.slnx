@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Clase3.Entidad/Clase3.Entidad.csproj" />
+  <Project Path="Clase3.MVC/Clase3.MVC.csproj" />
+  <Project Path="Clase3.Servicio/Clase3.Servicio.csproj" />
+</Solution>
