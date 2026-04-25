@@ -16,11 +16,14 @@
         @foreach (var herramienta in Model)
         {
             <tr>
-                <td>@herramienta.Descripcion</td> <a> 
+                <td>@herramienta.Descripcion</td>
                 <td>@herramienta.Precio</td>
                 <td><img src="@herramienta.Imagen" alt="@herramienta.Descripcion" width="100px" /></td>
                 <td>
                     <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@herramienta.Id">Eliminar</a>
+                </td>
+                <td>
+                   <a class="btn btn-warning" asp-action="Editar" asp-route-id="@herramienta.Id">Editar</a>
                 </td>
             </tr>
         }

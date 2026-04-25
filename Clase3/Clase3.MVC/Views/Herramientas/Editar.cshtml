@@ -1,0 +1,17 @@
+﻿@model Clase3.Entidad.Herramienta
+@{
+    ViewData["Title"] = "Editar Herramienta";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <label>Descripcion</label>
+    <input type="text" name="Descripcion" class="form-control" value="@Model.Descripcion"/>
+    <label>Precio</label>
+    <input type="text" name="Precio" class="form-control" value="@Model.Precio"/>
+    <label>Imagen</label>
+    <input type="text" name="Imagen" class="form-control" placeholder="@Model.Imagen"/>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

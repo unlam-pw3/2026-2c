@@ -7,7 +7,8 @@ namespace Clase3.Servicio
         List<Entidad.Herramienta> ObtenerHerramientas();
         void AgregarHerramienta(Entidad.Herramienta herramienta);
         Herramienta BuscarHerramientaPorId(int id);
-                void EliminarHerramienta(int id);
+        void EliminarHerramienta(int id);
+        void EditarHerramienta(Entidad.Herramienta herramienta);
     }   
 
     public class HerramientaServicio : IHerramientaServicio
@@ -31,7 +32,7 @@ namespace Clase3.Servicio
                 
              if (herramienta.Imagen == null)
              {
-             herramienta.Imagen = "\\imagenes\\default.jpg";
+             herramienta.Imagen = "\\imagenes\\sinimagen.jpg";
             } else             {
                 herramienta.Imagen = "\\imagenes\\" + herramienta.Imagen + ".jpg";
             }
@@ -51,6 +52,26 @@ namespace Clase3.Servicio
             {
                 herramientas.Remove(herramienta);
             }
+        }
+        public void EditarHerramienta(Herramienta herramienta)
+        {
+            var herramientaExistente = BuscarHerramientaPorId(herramienta.Id);
+            if (herramientaExistente != null)
+            {
+                if (herramienta.Descripcion != null)
+                {
+                    herramientaExistente.Descripcion = herramienta.Descripcion;
+                }
+                if (herramienta.Precio != 0)
+                {
+                    herramientaExistente.Precio = herramienta.Precio;
+                }
+                if (herramienta.Imagen != null && herramienta.Imagen != "")
+                {
+                    herramientaExistente.Imagen = "\\imagenes\\" + herramienta.Imagen + ".jpg";
+                }
+            }
+        
         }
     }
 }

@@ -34,5 +34,19 @@ namespace Clase3.MVC.Controllers
             _herramientaServicio.EliminarHerramienta(id);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Editar(int id)
+        {
+            var herramienta = _herramientaServicio.BuscarHerramientaPorId(id);
+            return View(herramienta);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Entidad.Herramienta herramienta)
+        {
+            _herramientaServicio.EditarHerramienta(herramienta);
+            return RedirectToAction("Index");
+        }
     }
 }
