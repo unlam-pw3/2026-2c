@@ -1,0 +1,29 @@
+﻿@model Clase4.POO.Web.Models.JugadorViewModel
+@{
+}
+
+<h1>Editar Jugador</h1>
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPersonajeElegido"></label>
+        <select id="IdPersonajeElegido" name="IdPersonajeElegido">
+            @foreach (Clase4.POO.Entidades.Personaje personaje in ViewBag.Personajes)
+            {
+                if(Model.IdPersonajeElegido == personaje.Id)
+                {
+                    <option value="@personaje.Id" selected>@personaje.Nombre (Mana:@personaje.Mana, HP Inicial:@personaje.HpInicial)</option>
+                }
+                else
+                {
+                    <option value="@personaje.Id">@personaje.Nombre (Mana:@personaje.Mana, HP Inicial:@personaje.HpInicial)</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+</form>

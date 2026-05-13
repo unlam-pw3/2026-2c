@@ -53,4 +53,37 @@ public class JugadoresController : Controller
         }
         return RedirectToAction("Lista");
     }
+
+    [HttpGet]
+    public IActionResult Editar(int id)
+    {
+        var jugador = _jugadoresLogica.ObtenerJugador(id);
+        if (jugador == null)
+        {
+            return NotFound();
+        }
+
+        var jugadorViewModel = new JugadorViewModel
+        {
+            Id = jugador.Id,
+            Nombre = jugador.Nombre,
+            IdPersonajeElegido = jugador.PersonajeElegido?.Id ?? 0
+        };
+        ViewBag.Personajes = _personajesLogica.ObtenerPersonajes();
+        return View(jugadorViewModel);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(JugadorViewModel jugadorViewModel)
+    {
+        var jugador = _jugadoresLogica.ObtenerJugador(jugadorViewModel.Id);
+        if (jugador == null)
+        {
+            return NotFound();
+        }
+
+        jugador.Nombre = jugadorViewModel.Nombre;
+        jugador.PersonajeElegido = _personajesLogica.ObtenerPersonajePorId(jugadorViewModel.IdPersonajeElegido);
+        return RedirectToAction("Lista");
+    }
 }
