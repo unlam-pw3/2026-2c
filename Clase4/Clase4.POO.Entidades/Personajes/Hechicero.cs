@@ -7,6 +7,7 @@ public class Hechicero : Personaje
 {
     public Hechicero()
     {
+        Nombre = "Hechicero";
         Raza = Raza.Hechicero;
         Imagen = "hechicero.png";
 

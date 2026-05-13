@@ -6,6 +6,7 @@ public class Elfo : Personaje
     {
         Raza = Raza.Elfo;
         Imagen = "elfo.png";
+        Nombre = "Elfo";
 
         HpInicial = 1200;
         Mana = 150;

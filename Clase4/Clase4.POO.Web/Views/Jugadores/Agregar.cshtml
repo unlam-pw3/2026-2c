@@ -1,0 +1,23 @@
+﻿@model Clase4.POO.Web.Models.JugadorViewModel
+@{
+
+}
+
+<h1>Agregar Jugador</h1>
+<form asp-action="Agregar" method="post">
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="IdPersonajeElegido"></label>
+        <select id="IdPersonajeElegido" name="IdPersonajeElegido">
+            @foreach (Clase4.POO.Entidades.Personaje personaje in ViewBag.Personajes)
+            {
+                <option value="@personaje.Id">@personaje.Nombre (Mana:@personaje.Mana, HP Inicial:@personaje.HpInicial)</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Agregar</button>
+</form>
+

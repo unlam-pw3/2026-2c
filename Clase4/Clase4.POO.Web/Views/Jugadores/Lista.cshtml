@@ -1,0 +1,35 @@
+﻿@model List<Clase4.POO.Entidades.Jugador>
+@{
+}
+
+<h1>Lista de Jugadores</h1>
+@* Agregar Jugador *@
+<a asp-action="Agregar" class="btn btn-primary mb-3">Agregar Jugador</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Avatar</th>
+            <th>Nombre</th>
+            <th>Personaje Elegido</th>
+            <th>Mana</th>
+            <th>HP Inicial</th>
+            <th>HP Actual</th>
+            <th>XP</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var jugador in Model)
+        {
+            <tr>
+                <td><img alt="@jugador.PersonajeElegido.Nombre" src="/img/@jugador.PersonajeElegido.Imagen" width="80px"/></td>
+                <td>@jugador.Nombre</td>
+                <td>@jugador.PersonajeElegido.Nombre</td>
+                <td>@jugador.PersonajeElegido.Mana</td>
+                <td>@jugador.PersonajeElegido.HpInicial</td>
+                <td>@jugador.PersonajeElegido.HpActual</td>
+                <td>@jugador.PersonajeElegido.Xp</td>
+            </tr>
+        }
+    </tbody>
+</table>
