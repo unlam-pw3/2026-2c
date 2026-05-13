@@ -7,6 +7,7 @@ public interface IJugadoresLogica
     public List<Jugador> ObtenerJugadores();
     public void AgregarJugador(Jugador jugador);
     public Jugador ObtenerJugador(int id);
+    void EliminarJugador(Jugador jugador);
 }
 
 public class JugadoresLogica : IJugadoresLogica
@@ -32,5 +33,12 @@ public class JugadoresLogica : IJugadoresLogica
     public Jugador ObtenerJugador(int id)
     {
         return _lista.FirstOrDefault(p => p.Id == id);
+    }
+
+    public void EliminarJugador(Jugador jugador)
+    {
+        if (jugador == null)
+            return;
+        _lista.Remove(jugador);
     }
 }

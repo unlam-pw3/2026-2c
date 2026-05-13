@@ -42,4 +42,15 @@ public class JugadoresController : Controller
         var jugadores = _jugadoresLogica.ObtenerJugadores();
         return View(jugadores);
     }
+
+    [HttpGet]
+    public IActionResult Eliminar(int id)
+    {
+        var jugador = _jugadoresLogica.ObtenerJugador(id);
+        if (jugador != null)
+        {
+            _jugadoresLogica.EliminarJugador(jugador);
+        }
+        return RedirectToAction("Lista");
+    }
 }
