@@ -2,12 +2,14 @@
 
 public class Partida
 {
-    public Personaje Jugador1 { get; }
-    public Personaje Jugador2 { get; }
-    public Partida(Personaje jugador1, Personaje jugador2)
+    public Guid Id { get; set; }
+    public Jugador Jugador1 { get; set; }
+    public Jugador? Jugador2 { get; set; }
+    public string Estado { get; set; }
+    public Jugador Ganador { get; set; }
+    public Partida(Jugador jugador1)
     {
         Jugador1 = jugador1;
-        Jugador2 = jugador2;
     }
 
     public int TurnoActual { get; set; } = 0;

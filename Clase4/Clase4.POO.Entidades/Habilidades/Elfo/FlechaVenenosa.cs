@@ -1,7 +1,9 @@
-﻿namespace Clase4.POO.Entidades.Habilidades.Elfo;
+﻿
+namespace Clase4.POO.Entidades.Habilidades.Elfo;
 
 public class FlechaVenenosa: IHabilidad
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Flecha Venenosa";
 
     public int Coste => 100;

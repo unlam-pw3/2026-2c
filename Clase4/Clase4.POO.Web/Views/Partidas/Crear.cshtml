@@ -1,0 +1,23 @@
+﻿@model PartidaViewModel
+
+@{
+}
+
+<h1>Crear Partida</h1>
+    <form asp-action="Crear" method="post">
+        <div class="form-group">
+            <label for="IdJugador1">Seleccionar Jugador 1</label>
+            <select id="IdJugador1" name="IdJugador1" class="form-control" required>
+                @foreach (JugadorViewModel jugador in ViewBag.Jugadores)
+                {
+                    <option value="@jugador.Id">@jugador.Nombre (@jugador.PersonajeElegido.Nombre)</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="MaximoTurnos">Máximo de Turnos</label>
+        <input value="5" type="number" id="MaximoTurnos" name="MaximoTurnos" class="form-control" min="1" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Partida</button>
+</form>
+

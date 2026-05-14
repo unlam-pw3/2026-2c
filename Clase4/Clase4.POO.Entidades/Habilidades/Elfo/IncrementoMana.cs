@@ -2,6 +2,7 @@
 
 public class IncrementoMana : IHabilidad
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Incremento de Mana";
     public int Coste { get; } = 20;
 

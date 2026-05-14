@@ -1,0 +1,34 @@
+﻿@model List<Clase4.POO.Web.Models.PartidaViewModel>
+
+@{
+}
+
+<h1>Lista de Partidas</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ver</th>
+            <th>Jugador 1</th>
+            <th>Jugador 2</th>
+            <th>Estado</th>
+            <th>Turno Actual</th>
+            <th>Maximo Turnos</th>
+            <th>Ganador</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var partida in Model)
+        {
+            <tr>
+                <td><a href="/partidas/detalle/@partida.Id" class="btn btn-info">Ver</a></td>
+                <td>@partida.Jugador1.Nombre</td>
+                <td>@(partida.Jugador2?.Nombre ?? "-")</td>
+                <td>@partida.Estado</td>
+                <td>@partida.TurnoActual</td>
+                <td>@partida.MaximoTurnos</td>
+                <td>@(partida.Ganador?.Nombre ?? "-")</td>
+            </tr>
+        }
+    </tbody>
+</table>

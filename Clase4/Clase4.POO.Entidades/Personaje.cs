@@ -58,6 +58,13 @@ public class Personaje
         AcumularExperiencia(personajeObjetivo);
     }
 
+    public void EjecutarHabilidad(Guid idHabilidad, Personaje personajeObjetivo)
+    {
+        var habilidad = this.ObtenerHabilidadesDisponibles().FirstOrDefault(h => h.Id == idHabilidad);
+        EjecutarHabilidad(habilidad, personajeObjetivo);
+    }
+
+
     public void EjecutarHabilidad(IHabilidad habilidad, Personaje personajeObjetivo)
     {
         if (habilidad == null || personajeObjetivo == null || habilidad.TurnosPendientesParaEjecutar > 0)

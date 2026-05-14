@@ -1,7 +1,8 @@
 ﻿namespace Clase4.POO.Entidades.Habilidades.Hechicero;
 
 public class BolaDeLava : IHabilidad
-    {
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Bola de Lava";
     public int Coste { get; } = 40;
     public int Enfriamiento => 3;

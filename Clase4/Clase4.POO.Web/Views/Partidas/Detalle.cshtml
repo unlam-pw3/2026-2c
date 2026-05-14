@@ -1,0 +1,30 @@
+﻿@model PartidaViewModel
+@{
+}
+
+<h1>Detalle de Partida</h1>
+<div>
+    <p><strong>Jugador 1:</strong> @Model.Jugador1.Nombre (@Model.Jugador1.PersonajeElegido.Nombre)</p>
+    <p><strong>Jugador 2:</strong> @(Model.Jugador2 != null ? $"{Model.Jugador2.Nombre} ({Model.Jugador2.PersonajeElegido.Nombre})" : "Aún no hay Jugador 2")</p>
+    <p><strong>Estado:</strong> @Model.Estado</p>
+    <p><strong>Turno Actual:</strong> @Model.TurnoActual</p>
+    <p><strong>Maximo Turnos:</strong> @Model.MaximoTurnos</p>
+    <p><strong>Ganador:</strong> @(Model.Ganador != null ? Model.Ganador.Nombre : "Aún no hay ganador")</p>
+    
+    @if (Model.Jugador2 == null)
+    {
+        <form action="/partidas/unirme" method="post">
+            <select name="idJugador" required>
+                @foreach (Clase4.POO.Entidades.Jugador jugador in ViewBag.Jugadores)
+                {
+                    if (Model.IdJugador1 != jugador.Id)
+                    {
+                        <option value="@jugador.Id">@jugador.Nombre (@jugador.PersonajeElegido.Nombre)</option>
+                    }
+                }
+            </select>
+            <input type="hidden" name="id" value="@Model.Id" />
+            <button type="submit" class="btn btn-primary">Unirme a esta partida</button>
+        </form>
+    }
+</div>

@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<IJugadoresLogica, JugadoresLogica>();
 builder.Services.AddSingleton<IPersonajesLogica, PersonajesLogica>();
+builder.Services.AddSingleton<IPartidasLogica, PartidasLogica>();
 
 var app = builder.Build();
 

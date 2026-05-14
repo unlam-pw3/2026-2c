@@ -8,6 +8,7 @@ namespace Clase4.POO.Entidades.Habilidades.Hechicero;
 
 public class Curacion : IHabilidad
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Curacion";
     public int Coste { get; } = 20;
 

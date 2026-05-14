@@ -2,6 +2,7 @@
 
 public class BolaDeFuego : IHabilidad
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Bola de Fuego";
     public int Coste { get; } = 30;
 

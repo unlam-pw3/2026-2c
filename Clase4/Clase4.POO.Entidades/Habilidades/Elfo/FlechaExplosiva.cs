@@ -2,6 +2,7 @@
 
 internal class FlechaExplosiva : IHabilidad
 {
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; } = "Flecha Explosiva";
     public int Coste { get; } = 150;
     public int Enfriamiento => 3;

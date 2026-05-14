@@ -1,4 +1,5 @@
 ﻿using Clase4.POO.Entidades;
+using Clase4.POO.Entidades.Personajes;
 
 namespace Clase4.POO.Logica;
 
@@ -12,7 +13,11 @@ public interface IJugadoresLogica
 
 public class JugadoresLogica : IJugadoresLogica
 {
-    private static List<Jugador> _lista = new List<Jugador>();
+    private static List<Jugador> _lista = new List<Jugador>()
+    {
+            new Jugador() { Id = 1, Nombre = "Legolas", PersonajeElegido = new Elfo() { Id = 1} },
+            new Jugador() { Id = 2, Nombre = "Gandalf", PersonajeElegido = new Hechicero() { Id = 2} },
+    };
 
     public List<Jugador> ObtenerJugadores()
     {
