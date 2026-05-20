@@ -41,5 +41,33 @@ namespace Clase6.EF.Web.Controllers
             juguetesLogica.Eliminar(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Editar(int id)
+        {
+            var juguete = juguetesLogica.ObtenerPorId(id);
+
+            if (juguete == null)
+                return NotFound();
+
+            return View(JugueteViewModel.FromEntity(juguete));
+        }
+
+        [HttpPost]
+        public IActionResult Editar(JugueteViewModel jugueteVM)
+        {
+            if (!ModelState.IsValid)
+                return View(jugueteVM);
+
+            var juguete = juguetesLogica.ObtenerPorId(jugueteVM.Id);
+            if (juguete == null)
+                return NotFound();
+
+            juguete.Nombre = jugueteVM.Nombre;
+            juguete.Precio = jugueteVM.Precio;
+            juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
+
+            juguetesLogica.Actualizar(juguete);
+            return RedirectToAction("Index");
+        }
     }
 }

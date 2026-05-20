@@ -4,9 +4,11 @@ using Clase6.EF.Entidades;
 namespace Clase6.EF.Logica;
 public interface IJuguetesLogica
 {
+    void Actualizar(Juguete juguete);
     void Agregar(Juguete juguete);
     void Eliminar(int id);
     List<Juguete> Obtener();
+    public Juguete? ObtenerPorId(int id);
 }
 
 public class JuguetesLogica : IJuguetesLogica
@@ -20,6 +22,12 @@ public class JuguetesLogica : IJuguetesLogica
     {
         return db.Juguetes.ToList();
     }
+
+    public Juguete? ObtenerPorId(int id)
+    {
+        return db.Juguetes.FirstOrDefault(j => j.Id == id);
+    }
+
     public void Agregar(Juguete juguete)
     {
         db.Juguetes.Add(juguete);
@@ -36,4 +44,9 @@ public class JuguetesLogica : IJuguetesLogica
         db.Juguetes.Remove(juguete);
         db.SaveChanges();
     }
+    public void Actualizar(Juguete juguete)
+    {
+        db.SaveChanges();
+    }
+
 }

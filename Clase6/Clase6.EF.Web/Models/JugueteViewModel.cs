@@ -19,4 +19,15 @@ public class JugueteViewModel
             EdadRecomendada = this.EdadRecomendada
         };
     }
+
+    public static JugueteViewModel FromEntity(Juguete juguete)
+    {
+        return new JugueteViewModel
+        {
+            Id = juguete.Id,
+            Nombre = juguete.Nombre,
+            Precio = juguete.Precio,
+            EdadRecomendada = juguete.EdadRecomendada
+        };
+    }
 }

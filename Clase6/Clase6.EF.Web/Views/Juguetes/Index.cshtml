@@ -19,7 +19,7 @@
         @foreach (var juguete in Model)
         {
             <tr>
-                <td>@juguete.Nombre</td>
+                <td><a href="/juguetes/editar/@juguete.Id">@juguete.Nombre</a></td>
                 <td>@juguete.Precio</td>
                 <td>@juguete.EdadRecomendada</td>
                 <td><a href="/juguetes/eliminar/@juguete.Id">Eliminar</a></td>
