@@ -1,0 +1,22 @@
+﻿using Clase6.EF.Entidades;
+
+namespace Clase6.EF.Web.Models;
+
+public class JugueteViewModel
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public decimal Precio { get; set; }
+    public int EdadRecomendada { get; set; }
+
+    public Juguete ToEntity()
+    {
+        return new Juguete
+        {
+            Id = this.Id,
+            Nombre = this.Nombre,
+            Precio = this.Precio,
+            EdadRecomendada = this.EdadRecomendada
+        };
+    }
+}
