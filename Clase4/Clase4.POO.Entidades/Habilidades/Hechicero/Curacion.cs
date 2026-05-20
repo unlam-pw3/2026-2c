@@ -30,6 +30,7 @@ public class Curacion : IHabilidad
 
         personajeEjecutor.Mana -= Coste;
 
+        personajeObjetivo = personajeEjecutor;
         //Curacion + 300 hp
         personajeObjetivo.HpActual += 300;
         if (personajeObjetivo.HpActual > personajeObjetivo.HpInicial)

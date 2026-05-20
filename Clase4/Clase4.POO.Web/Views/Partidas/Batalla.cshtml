@@ -1,100 +1,225 @@
-﻿@model Clase4.POO.Web.Models.BatallaViewModel
+﻿@using Clase4.POO.Entidades
+
+<h1 style="display:none">Batalla (@Model.Partida.Estado)</h1>
 @{
+    var jug1HabilidadesEjecutables = 0;
+    var jug2HabilidadesEjecutables = 0;
+}
+@section Styles {
+    <link rel="stylesheet" href="/css/batalla.css">
 }
 
-<h1>Batalla (@Model.Partida.Estado)</h1>
-<form action="/partidas/batalla" method="post">
-    <input type="hidden" value="@Model.Id" name="Id" />
-    @* Jugador 1 *@
-    <div class="form-group">
-        <label>Jugador 1: @Model.Partida.Jugador1.Nombre (@Model.Partida.Jugador1.PersonajeElegido.Nombre)</label>
 
+<div class="page-bg"></div>
+
+<div class="arena-wrapper">
+
+    <div class="arena-header">
+        <div class="rune-line"><span class="rune">⚔ ARENA ⚔</span></div>
+        <h2 class="arena-title">BATALLA</h2>
+        <div class="estado-badge">Estado: <span>@Model.Partida.Estado</span></div>
     </div>
-    <div class="form-group">
-        <label>
-            HP: @Model.Partida.Jugador1.PersonajeElegido.HpActual / @Model.Partida.Jugador1.PersonajeElegido.HpInicial
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Mana: @Model.Partida.Jugador1.PersonajeElegido.Mana
-        </label>
-    </div>
-    <div class="form-group">
-        <label for="IdJugador1HabilidadSeleccionada">Seleccionar Habilidad</label>
-        <select id="IdJugador1HabilidadSeleccionada" name="IdJugador1HabilidadSeleccionada" class="form-control">
-            @foreach (var habilidad in Model.Partida.Jugador1.PersonajeElegido.ObtenerHabilidadesDisponibles())
-            {
-                if (habilidad.TurnosPendientesParaEjecutar > 0)
-                {
-                    <option value="@habilidad.Id" disabled>@habilidad.Nombre (Turnos Pendientes: @habilidad.TurnosPendientesParaEjecutar, Coste Mana: @habilidad.Coste)</option>
-                }
-                else
-                {
-                    <option value="@habilidad.Id">@habilidad.Nombre (Coste Mana: @habilidad.Coste, Enfriamiento: @habilidad.Enfriamiento)</option>
-                }
-            }
-        </select>
-    </div>
-    @if (Model.IdTurnoJugador == Model.Partida.Jugador1.Id)
-    {
-        if (Model.Jugador1PuedeUsarHabilidad)
-        {
-            <div class="form-group">
-                <button name="accion" type="submit" class="btn btn-danger" value="EjecutarHabilidadJug1">Ejecutar Habilidad</button>
+
+    <div class="batalla-grid">
+
+        @* ══════════ JUGADOR 1 ══════════ *@
+        <form action="/partidas/batalla" method="post"
+              class="panel izquierdo @(Model.IdTurnoJugador == Model.Partida.Jugador1.Id ? "es-turno" : "")">
+
+            <input type="hidden" value="@Model.Id" name="Id" />
+
+            @* Ficha *@
+            <div class="personaje-ficha">
+                <div class="personaje-avatar-placeholder">🧙</div>
+                <div>
+                    <div class="personaje-nombre-jugador">@Model.Partida.Jugador1.Nombre</div>
+                    <div class="personaje-nombre">@Model.Partida.Jugador1.PersonajeElegido.Nombre</div>
+                    <div class="personaje-raza">@Model.Partida.Jugador1.PersonajeElegido.Raza</div>
+                </div>
             </div>
-        }
-        <div class="form-group">
-            <button name="accion" type="submit" class="btn btn-danger" value="EjecutarAtaqueBasicoJug1">Ejecutar Ataque Basico</button>
-        </div>
-    }
-</form>
-<form action="/partidas/batalla" method="post">
-    <input type="hidden" value="@Model.Id" name="Id" />
-    @* Jugador 2 *@
-    <div class="form-group">
-        <label>Jugador 2: @Model.Partida.Jugador2.Nombre (@Model.Partida.Jugador2.PersonajeElegido.Nombre)</label>
 
-    </div>
-    <div class="form-group">
-        <label>
-            HP: @Model.Partida.Jugador2.PersonajeElegido.HpActual / @Model.Partida.Jugador2.PersonajeElegido.HpInicial
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Mana: @Model.Partida.Jugador2.PersonajeElegido.Mana
-        </label>
-    </div>
-    <div class="form-group">
-        <label for="IdJugador2HabilidadSeleccionada">Seleccionar Habilidad</label>
-        <select id="IdJugador2HabilidadSeleccionada" name="IdJugador2HabilidadSeleccionada" class="form-control">
-            @foreach (var habilidad in Model.Partida.Jugador2.PersonajeElegido.ObtenerHabilidadesDisponibles())
-            {
-                if (habilidad.TurnosPendientesParaEjecutar > 0)
-                {
-                    <option value="@habilidad.Id" disabled>@habilidad.Nombre (Turnos Pendientes: @habilidad.TurnosPendientesParaEjecutar, Coste Mana: @habilidad.Coste)</option>
-                }
-                else
-                {
-                    <option value="@habilidad.Id">@habilidad.Nombre (Coste Mana: @habilidad.Coste, Enfriamiento: @habilidad.Enfriamiento)</option>
-                }
+            @* Stats *@
+            @{
+                var p1 = Model.Partida.Jugador1.PersonajeElegido;
+                var p1HpPct = p1.HpInicial > 0 ? p1.HpActual * 100 / p1.HpInicial : 0;
+                var p1ManaPct = 200; @* ajustá al máximo de mana real si lo tenés *@
             }
-        </select>
-    </div>
-
-    @if (Model.IdTurnoJugador == Model.Partida.Jugador2.Id)
-    {
-        if (Model.Jugador2PuedeUsarHabilidad)
-        {
-            <div class="form-group">
-                <button name="accion" type="submit" class="btn btn-danger" value="EjecutarHabilidadJug2">Ejecutar Habilidad</button>
+            <div class="stats-bloque">
+                <div class="stat-row">
+                    <span class="stat-label hp">HP</span>
+                    <div class="stat-bar hp-bar">
+                        <div class="stat-fill hp @(p1HpPct <= 25 ? "critico" : "")"
+                             style="width:@(p1HpPct)%"></div>
+                    </div>
+                    <span class="stat-val hp">@p1.HpActual / @p1.HpInicial</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label mana">MANA</span>
+                    <div class="stat-bar mana-bar">
+                        <div class="stat-fill mana" style="width:100%"></div>
+                    </div>
+                    <span class="stat-val mana">@p1.Mana</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label xp">XP</span>
+                    <div class="stat-bar xp-bar">
+                        <div class="stat-fill xp" style="width:@(Math.Min(p1.Xp / 10, 100))%"></div>
+                    </div>
+                    <span class="stat-val xp">@p1.Xp</span>
+                </div>
             </div>
-        }
-        <div class="form-group">
-            <button name="accion" type="submit" class="btn btn-danger" value="EjecutarAtaqueBasicoJug2">Ejecutar Ataque Basico</button>
+
+            @* Acciones *@
+            <div class="acciones-titulo">⚔ Acciones</div>
+
+            <span class="habilidades-label">Seleccionar habilidad</span>
+            <select id="IdJugador1HabilidadSeleccionada"
+                    name="IdJugador1HabilidadSeleccionada"
+                    class="form-control">
+                @foreach (IHabilidad habilidad in p1.ObtenerHabilidadesDisponibles())
+                {
+                    if (habilidad.TurnosPendientesParaEjecutar > 0)
+                    {
+                        <option value="@habilidad.Id" disabled>
+                            ❄ @habilidad.Nombre (@habilidad.TurnosPendientesParaEjecutar turnos · @habilidad.Coste mana)
+                        </option>
+                    }
+                    else
+                    {
+                        jug1HabilidadesEjecutables++;
+                        <option value="@habilidad.Id">
+                            ✦ @habilidad.Nombre (@habilidad.Coste mana · enf. @habilidad.Enfriamiento)
+                        </option>
+                    }
+                }
+            </select>
+
+            @if (Model.IdTurnoJugador == Model.Partida.Jugador1.Id)
+            {
+                if (Model.Jugador1PuedeUsarHabilidad && jug1HabilidadesEjecutables > 0)
+                {
+                    <button name="accion" type="submit"
+                            class="btn btn-habilidad"
+                            value="EjecutarHabilidadJug1">
+                        ✦ Ejecutar Habilidad
+                    </button>
+                }
+                <button name="accion" type="submit"
+                        class="btn btn-ataque"
+                        value="EjecutarAtaqueBasicoJug1">
+                    ⚔ Ataque Básico
+                </button>
+            }
+            else
+            {
+                @* Botones fantasma para mantener el layout cuando no es su turno *@
+                <button type="button" class="btn btn-habilidad" disabled>✦ Ejecutar Habilidad</button>
+                <button type="button" class="btn btn-ataque" disabled>⚔ Ataque Básico</button>
+            }
+
+        </form>
+
+        @* ══════════ VS ══════════ *@
+        <div class="vs-col">
+            <div class="vs-line"></div>
+            <div class="vs-text">VS</div>
+            <div class="vs-line"></div>
         </div>
-    }
 
-</form>
+        @* ══════════ JUGADOR 2 ══════════ *@
+        <form action="/partidas/batalla" method="post"
+              class="panel derecho @(Model.IdTurnoJugador == Model.Partida.Jugador2.Id ? "es-turno" : "")">
 
+            <input type="hidden" value="@Model.Id" name="Id" />
+
+            @* Ficha *@
+            @{
+                var p2 = Model.Partida.Jugador2.PersonajeElegido;
+                var p2HpPct = p2.HpInicial > 0 ? p2.HpActual * 100 / p2.HpInicial : 0;
+            }
+            <div class="personaje-ficha">
+                <div class="personaje-avatar-placeholder">🧝</div>
+                <div>
+                    <div class="personaje-nombre-jugador">@Model.Partida.Jugador2.Nombre</div>
+                    <div class="personaje-nombre">@Model.Partida.Jugador2.PersonajeElegido.Nombre</div>
+                    <div class="personaje-raza">@Model.Partida.Jugador2.PersonajeElegido.Raza</div>
+                </div>
+            </div>
+
+            @* Stats *@
+            <div class="stats-bloque">
+                <div class="stat-row">
+                    <span class="stat-label hp">HP</span>
+                    <div class="stat-bar hp-bar">
+                        <div class="stat-fill hp @(p2HpPct <= 25 ? "critico" : "")"
+                             style="width:@(p2HpPct)%"></div>
+                    </div>
+                    <span class="stat-val hp">@p2.HpActual / @p2.HpInicial</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label mana">MANA</span>
+                    <div class="stat-bar mana-bar">
+                        <div class="stat-fill mana" style="width:100%"></div>
+                    </div>
+                    <span class="stat-val mana">@p2.Mana</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label xp">XP</span>
+                    <div class="stat-bar xp-bar">
+                        <div class="stat-fill xp" style="width:@(Math.Min(p2.Xp / 10, 100))%"></div>
+                    </div>
+                    <span class="stat-val xp">@p2.Xp</span>
+                </div>
+            </div>
+
+            @* Acciones *@
+            <div class="acciones-titulo">⚔ Acciones</div>
+
+            <span class="habilidades-label">Seleccionar habilidad</span>
+            <select id="IdJugador2HabilidadSeleccionada"
+                    name="IdJugador2HabilidadSeleccionada"
+                    class="form-control">
+                @foreach (IHabilidad habilidad in p2.ObtenerHabilidadesDisponibles())
+                {
+                    if (habilidad.TurnosPendientesParaEjecutar > 0)
+                    {
+                        <option value="@habilidad.Id" disabled>
+                            ❄ @habilidad.Nombre (@habilidad.TurnosPendientesParaEjecutar turnos · @habilidad.Coste mana)
+                        </option>
+                    }
+                    else
+                    {
+                        jug2HabilidadesEjecutables++;
+                        <option value="@habilidad.Id">
+                            ✦ @habilidad.Nombre (@habilidad.Coste mana · enf. @habilidad.Enfriamiento)
+                        </option>
+                    }
+                }
+            </select>
+
+            @if (Model.IdTurnoJugador == Model.Partida.Jugador2.Id)
+            {
+                if (Model.Jugador2PuedeUsarHabilidad && jug2HabilidadesEjecutables > 0)
+                {
+                    <button name="accion" type="submit"
+                            class="btn btn-habilidad"
+                            value="EjecutarHabilidadJug2">
+                        ✦ Ejecutar Habilidad
+                    </button>
+                }
+                <button name="accion" type="submit"
+                        class="btn btn-ataque"
+                        value="EjecutarAtaqueBasicoJug2">
+                    ⚔ Ataque Básico
+                </button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-habilidad" disabled>✦ Ejecutar Habilidad</button>
+                <button type="button" class="btn btn-ataque" disabled>⚔ Ataque Básico</button>
+            }
+
+        </form>
+
+    </div>
+</div>

@@ -79,4 +79,15 @@ public class Personaje
             AcumularExperiencia(personajeObjetivo);
         }
     }
+
+    public void DisminuirEnfriamientos()
+    {
+        foreach (var habilidad in ObtenerHabilidadesDisponibles())
+        {
+            if (habilidad.TurnosPendientesParaEjecutar > 0)
+            {
+                habilidad.TurnosPendientesParaEjecutar--;
+            }
+        }
+    }
 }

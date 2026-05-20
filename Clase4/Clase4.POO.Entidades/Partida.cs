@@ -14,4 +14,27 @@ public class Partida
 
     public int TurnoActual { get; set; } = 0;
     public int MaximoTurnos { get; set; } = 50;
+
+    public void CompletarTurno(Jugador jug)
+    {        
+        TurnoActual++;
+
+        if (TurnoActual > MaximoTurnos)
+        {
+            Estado = "Finalizada";
+
+            if (Jugador1.PersonajeElegido.HpActual > Jugador2.PersonajeElegido.HpActual)
+            {
+                Ganador = Jugador1;
+            }
+            else if (Jugador2.PersonajeElegido.HpActual > Jugador1.PersonajeElegido.HpActual)
+            {
+                Ganador = Jugador2;
+            }
+            else
+            {
+                Ganador = null;
+            }
+        }
+    }
 }

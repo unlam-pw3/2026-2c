@@ -136,6 +136,7 @@ public class PartidasController : Controller
                 partida.Jugador1.PersonajeElegido.EjecutarAtaqueBasico(partida.Jugador2.PersonajeElegido);
                 
                 batalla.IdTurnoJugador = partida.Jugador2.Id;
+                partida.Jugador1.PersonajeElegido.DisminuirEnfriamientos();
                 batalla.Jugador2PuedeUsarHabilidad = true;
                 break;
 
@@ -150,6 +151,7 @@ public class PartidasController : Controller
             case "EjecutarAtaqueBasicoJug2":
                 partida.Jugador2.PersonajeElegido.EjecutarAtaqueBasico(partida.Jugador1.PersonajeElegido);
                 batalla.IdTurnoJugador = partida.Jugador1.Id;
+                partida.Jugador2.PersonajeElegido.DisminuirEnfriamientos();
                 batalla.Jugador1PuedeUsarHabilidad = true;
                 break;
         }
