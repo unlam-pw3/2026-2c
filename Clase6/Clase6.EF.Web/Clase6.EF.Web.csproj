@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Clase6.EF.Entidades\Clase6.EF.Entidades.csproj" />
+    <ProjectReference Include="..\Clase6.EF.Logica\Clase6.EF.Logica.csproj" />
   </ItemGroup>
 
 </Project>

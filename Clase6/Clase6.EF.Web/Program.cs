@@ -1,5 +1,6 @@
 using System;
 using Clase6.EF.Entidades;
+using Clase6.EF.Logica;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,8 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 using var db = new JugueteriaDbContext();
 db.Database.Migrate();
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IJuguetesLogica, JuguetesLogica>();
+
+//add JugueteriaDbContext
+builder.Services.AddDbContext<JugueteriaDbContext>();
+
 
 var app = builder.Build();
 
