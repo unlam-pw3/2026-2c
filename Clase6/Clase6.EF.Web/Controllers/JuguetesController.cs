@@ -16,7 +16,7 @@ namespace Clase6.EF.Web.Controllers
 
         public IActionResult Index()
         {
-            var juguetes = juguetesLogica.ObtenerJuguetes();
+            var juguetes = juguetesLogica.Obtener();
             return View(juguetes);
         }
 
@@ -32,7 +32,13 @@ namespace Clase6.EF.Web.Controllers
             if (!ModelState.IsValid)
                 return View(jugueteVM);
 
-            juguetesLogica.AgregarJuguete(jugueteVM.ToEntity());
+            juguetesLogica.Agregar(jugueteVM.ToEntity());
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Eliminar(int id)
+        {
+            juguetesLogica.Eliminar(id);
             return RedirectToAction("Index");
         }
     }
