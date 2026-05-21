@@ -3,10 +3,23 @@
 *@
 @{
 }
+
+@section Scripts {
+    <link href="https://cdn.datatables.net/v/dt/dt-2.3.8/datatables.min.css" rel="stylesheet" integrity="sha384-1BvCnyKidMPIGQGjvMn+w+90hHBhYJtF+R7os4NX2Abe7tSxWQadHRTSH5qb559A" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/v/dt/dt-2.3.8/datatables.min.js" integrity="sha384-kjkli48Tmhwhaghq0IIRm8gFmMdnihfu1ywAOyyGWYMsoZZi/6AX2fWzpsqahoFw" crossorigin="anonymous"></script>
+
+    <script>
+            new DataTable('#tblJuguetes', {
+        language: {
+            url: '//cdn.datatables.net/plug-ins/2.3.8/i18n/es-ES.json',
+        },
+        });
+    </script>
+}
 @model IEnumerable<Clase6.EF.Entidades.Juguete>
 
 <h1>Juguetes</h1>
-<table class="table">
+<table class="table" id="tblJuguetes">
     <thead>
         <tr>
             <th>Nombre</th>
