@@ -43,6 +43,8 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Agregar()
         {
             ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+
             return View();
         }
 
@@ -52,10 +54,15 @@ namespace Clase6.EF.Web.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+                ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+                ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
+
                 return View(jugueteVM);
             }
+            var juguete = jugueteVM.ToEntity();
+            juguete.Categorias = categoriasLogica.ObtenerPorIds(jugueteVM.CategoriaIds);
 
-            juguetesLogica.Agregar(jugueteVM.ToEntity());
+            juguetesLogica.Agregar(juguete);
             return RedirectToAction("Index");
         }
 
