@@ -8,10 +8,12 @@ namespace Clase6.EF.Web.Controllers
     public class JuguetesController : Controller
     {
         private readonly IJuguetesLogica juguetesLogica;
+        private readonly IFabricantesLogica fabricantesLogica;
 
-        public JuguetesController(IJuguetesLogica juguetesLogica)
+        public JuguetesController(IJuguetesLogica juguetesLogica, IFabricantesLogica fabricantesLogica)
         {
             this.juguetesLogica = juguetesLogica;
+            this.fabricantesLogica = fabricantesLogica;
         }
 
         public IActionResult Index()
@@ -45,6 +47,7 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Editar(int id)
         {
             var juguete = juguetesLogica.ObtenerPorId(id);
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
 
             if (juguete == null)
                 return NotFound();
@@ -56,7 +59,10 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Editar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
                 return View(jugueteVM);
+            }
 
             var juguete = juguetesLogica.ObtenerPorId(jugueteVM.Id);
             if (juguete == null)
@@ -65,6 +71,7 @@ namespace Clase6.EF.Web.Controllers
             juguete.Nombre = jugueteVM.Nombre;
             juguete.Precio = jugueteVM.Precio;
             juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
+            juguete.FabricanteId = jugueteVM.FabricanteId;
 
             juguetesLogica.Actualizar(juguete);
             return RedirectToAction("Index");

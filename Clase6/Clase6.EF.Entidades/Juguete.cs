@@ -7,6 +7,8 @@ public class Juguete
     public string Nombre { get; set; }
     public decimal Precio { get; set; }
     public int EdadRecomendada { get; set; }
+    public int? FabricanteId { get; set; }
+    public Fabricante? Fabricante { get; set; }
 }
 
 //paso 1

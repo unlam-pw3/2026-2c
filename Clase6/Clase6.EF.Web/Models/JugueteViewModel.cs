@@ -9,6 +9,8 @@ public class JugueteViewModel
     public decimal Precio { get; set; }
     public int EdadRecomendada { get; set; }
 
+    public int FabricanteId { get; set; }
+
     public Juguete ToEntity()
     {
         return new Juguete
@@ -16,7 +18,8 @@ public class JugueteViewModel
             Id = this.Id,
             Nombre = this.Nombre,
             Precio = this.Precio,
-            EdadRecomendada = this.EdadRecomendada
+            EdadRecomendada = this.EdadRecomendada,
+            FabricanteId = this.FabricanteId
         };
     }
 
@@ -27,7 +30,8 @@ public class JugueteViewModel
             Id = juguete.Id,
             Nombre = juguete.Nombre,
             Precio = juguete.Precio,
-            EdadRecomendada = juguete.EdadRecomendada
+            EdadRecomendada = juguete.EdadRecomendada,
+            FabricanteId = juguete.FabricanteId ?? 0
         };
     }
 }

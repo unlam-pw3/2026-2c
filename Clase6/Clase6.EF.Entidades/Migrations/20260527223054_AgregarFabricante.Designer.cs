@@ -3,6 +3,7 @@ using Clase6.EF.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    partial class JugueteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260527223054_AgregarFabricante")]
+    partial class AgregarFabricante
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,26 +45,6 @@ namespace Clase6.EF.Entidades.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fabricantes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "LEGO",
-                            Pais = "Dinamarca"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Hasbro",
-                            Pais = "Estados Unidos"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Mattel",
-                            Pais = "Estados Unidos"
-                        });
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Juguete", b =>
