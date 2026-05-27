@@ -33,6 +33,21 @@
         </select>
         <span asp-validation-for="FabricanteId" class="text-danger"></span>
     </div>
+    @* check box list de Categoria *@
+    <div class="form-group">
+        <label>Categorías</label>
+        <div>
+            @foreach (var categoria in ViewBag.Categorias)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check accept-policy" type="checkbox" name="CategoriaIds" value="@categoria.Id" @(ViewBag.CategoriaIdsSeleccionados.Contains(categoria.Id) ? "checked" : "") />
+                    <label class="form-checkaccept-policy" for="CategoriaIds">@categoria.Nombre</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    
     <button type="submit" class="btn btn-primary">Guardar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>

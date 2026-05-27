@@ -16,7 +16,9 @@ public class FabricantesLogica : IFabricantesLogica
     }
     public List<Fabricante> ObtenerTodos()
     {
-        return db.Fabricantes.ToList();
+        return db.Fabricantes
+            .OrderBy(c => c.Nombre)
+            .ToList();
     }
     public Fabricante? ObtenerPorId(int id)
     {

@@ -16,6 +16,7 @@ builder.Services.AddControllersWithViews();
 //el tiempo de vida es un Request
 builder.Services.AddScoped<IJuguetesLogica, JuguetesLogica>();
 builder.Services.AddScoped<IFabricantesLogica, FabricantesLogica>();
+builder.Services.AddScoped<ICategoriasLogica, CategoriasLogica>();
 
 //singleton
 //el tiempo de vida es toda la aplicacion

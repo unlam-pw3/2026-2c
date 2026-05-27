@@ -9,6 +9,7 @@ public class Juguete
     public int EdadRecomendada { get; set; }
     public int? FabricanteId { get; set; }
     public Fabricante? Fabricante { get; set; }
+    public List<Categoria> Categorias { get; set; } = new();
 }
 
 //paso 1

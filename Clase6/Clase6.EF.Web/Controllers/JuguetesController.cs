@@ -9,11 +9,16 @@ namespace Clase6.EF.Web.Controllers
     {
         private readonly IJuguetesLogica juguetesLogica;
         private readonly IFabricantesLogica fabricantesLogica;
+        private readonly ICategoriasLogica categoriasLogica;
 
-        public JuguetesController(IJuguetesLogica juguetesLogica, IFabricantesLogica fabricantesLogica)
+
+        public JuguetesController(IJuguetesLogica juguetesLogica
+            , IFabricantesLogica fabricantesLogica
+            , ICategoriasLogica categoriasLogica)
         {
             this.juguetesLogica = juguetesLogica;
             this.fabricantesLogica = fabricantesLogica;
+            this.categoriasLogica = categoriasLogica;
         }
 
         public IActionResult Index(int? FabricanteId)
@@ -63,10 +68,13 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Editar(int id)
         {
             var juguete = juguetesLogica.ObtenerPorId(id);
-            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
 
             if (juguete == null)
                 return NotFound();
+
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+            ViewBag.CategoriaIdsSeleccionados = juguete.Categorias.Select(c => c.Id).ToList();
 
             return View(JugueteViewModel.FromEntity(juguete));
         }
@@ -77,6 +85,9 @@ namespace Clase6.EF.Web.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+                ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+                ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
+
                 return View(jugueteVM);
             }
 
@@ -88,6 +99,7 @@ namespace Clase6.EF.Web.Controllers
             juguete.Precio = jugueteVM.Precio;
             juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
             juguete.FabricanteId = jugueteVM.FabricanteId;
+            juguete.Categorias = categoriasLogica.ObtenerPorIds(jugueteVM.CategoriaIds);
 
             juguetesLogica.Actualizar(juguete);
             return RedirectToAction("Index");
