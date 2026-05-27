@@ -37,6 +37,7 @@ namespace Clase6.EF.Web.Controllers
         //Agregar
         public IActionResult Agregar()
         {
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
             return View();
         }
 
@@ -44,7 +45,10 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Agregar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
                 return View(jugueteVM);
+            }
 
             juguetesLogica.Agregar(jugueteVM.ToEntity());
             return RedirectToAction("Index");
