@@ -8,6 +8,7 @@ public interface IJuguetesLogica
     void Agregar(Juguete juguete);
     void Eliminar(int id);
     List<Juguete> Obtener();
+    List<Juguete> ObtenerPorFabricanteId(int value);
     public Juguete? ObtenerPorId(int id);
 }
 
@@ -49,4 +50,10 @@ public class JuguetesLogica : IJuguetesLogica
         db.SaveChanges();
     }
 
+    public List<Juguete> ObtenerPorFabricanteId(int fabricanteId)
+    {
+        return db.Juguetes
+            .Where(j => j.FabricanteId == fabricanteId)
+            .ToList();
+    }
 }

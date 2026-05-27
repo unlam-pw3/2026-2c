@@ -19,6 +19,34 @@
 @model IEnumerable<Clase6.EF.Entidades.Juguete>
 
 <h1>Juguetes</h1>
+
+@* select option FabricanteId y boton Filtrar *@
+<form method="get" class="mb-3">
+    <div class="form-group">
+        <label for="fabricanteId">Filtrar por Fabricante:</label>
+        <select name="fabricanteId" id="fabricanteId" class="form-control">
+            <option value="">Todos</option>
+            @foreach (var fabricante in ViewBag.Fabricantes)
+            {
+                if ((int)ViewBag.FabricanteIdSeleccionado == fabricante.Id)
+                {
+                    <option value="@fabricante.Id" selected>@fabricante.Nombre</option>
+                }
+                else
+                {
+                    <option value="@fabricante.Id">@fabricante.Nombre</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+</form>
+
+
+<div class="mb-3">
+    <a href="/juguetes/crear" class="btn btn-primary">Crear Nuevo Juguete</a>
+</div>
+
 <table class="table" id="tblJuguetes">
     <thead>
         <tr>

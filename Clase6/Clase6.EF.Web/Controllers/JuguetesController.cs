@@ -16,9 +16,21 @@ namespace Clase6.EF.Web.Controllers
             this.fabricantesLogica = fabricantesLogica;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? FabricanteId)
         {
-            var juguetes = juguetesLogica.Obtener();
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.FabricanteIdSeleccionado = FabricanteId ?? 0;
+
+            List<Juguete> juguetes;
+            if (FabricanteId.HasValue)
+            {
+                juguetes = juguetesLogica.ObtenerPorFabricanteId(FabricanteId.Value);
+            }
+            else
+            {
+                juguetes = juguetesLogica.Obtener();
+            }
+
             return View(juguetes);
         }
 
