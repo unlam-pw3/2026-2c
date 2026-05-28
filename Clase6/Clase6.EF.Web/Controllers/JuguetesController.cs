@@ -33,7 +33,7 @@ namespace Clase6.EF.Web.Controllers
             }
             else
             {
-                juguetes = juguetesLogica.Obtener();
+                juguetes = juguetesLogica.Obtener(incluirCategorias:true);
             }
 
             return View(juguetes);

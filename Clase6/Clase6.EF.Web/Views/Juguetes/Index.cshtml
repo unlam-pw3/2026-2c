@@ -53,6 +53,8 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Edad Recomendada</th>
+            <th>Fabricante</th>
+            <th>Categorías</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -63,6 +65,17 @@
                 <td><a href="/juguetes/editar/@juguete.Id">@juguete.Nombre</a></td>
                 <td>@juguete.Precio</td>
                 <td>@juguete.EdadRecomendada</td>
+                <td>@juguete.Fabricante?.Nombre</td>
+                <td>
+                    @if (juguete.Categorias != null && juguete.Categorias.Any())
+                    {
+                        @string.Join(", ", juguete.Categorias.OrderBy(c=>c.Nombre).Select(c => c.Nombre))
+                    }
+                    else
+                    {
+                        <em>-</em>
+                    }
+                </td>
                 <td><a href="/juguetes/eliminar/@juguete.Id">Eliminar</a></td>
             </tr>
         }

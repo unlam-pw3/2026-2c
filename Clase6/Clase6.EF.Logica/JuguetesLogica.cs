@@ -8,7 +8,7 @@ public interface IJuguetesLogica
     void Actualizar(Juguete juguete);
     void Agregar(Juguete juguete);
     void Eliminar(int id);
-    List<Juguete> Obtener();
+    List<Juguete> Obtener(bool incluirCategorias = false);
     List<Juguete> ObtenerPorFabricanteId(int value);
     public Juguete? ObtenerPorId(int id);
 }
@@ -20,8 +20,11 @@ public class JuguetesLogica : IJuguetesLogica
     {
         this.db = db;
     }
-    public List<Juguete> Obtener()
+    public List<Juguete> Obtener(bool incluirCategorias = false)
     {
+        if(incluirCategorias)
+            return db.Juguetes.Include(j => j.Categorias).ToList();
+
         return db.Juguetes.ToList();
     }
 
@@ -40,8 +43,8 @@ public class JuguetesLogica : IJuguetesLogica
 
     public void Eliminar(int id)
     {
-        var juguete = Obtener()
-            .FirstOrDefault(j => j.Id == id);
+        var juguete = ObtenerPorId(id);
+
         if (juguete == null)
             return;
 
@@ -56,7 +59,17 @@ public class JuguetesLogica : IJuguetesLogica
     public List<Juguete> ObtenerPorFabricanteId(int fabricanteId)
     {
         return db.Juguetes
+            .Include(j => j.Categorias)
             .Where(j => j.FabricanteId == fabricanteId)
             .ToList();
     }
+
+    //obtener juguetes por categoria
+    // public List<Juguete> ObtenerPorCategoriaId(int categoriaId)
+    //{
+    //    return db.Juguetes
+    //        .Include(j => j.Categorias)
+    //        .Where(j => j.Categorias.Any(c => c.Id == categoriaId))
+    //        .ToList();
+    //}
 }
