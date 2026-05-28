@@ -8,21 +8,43 @@ namespace Clase6.EF.Web.Controllers
     public class JuguetesController : Controller
     {
         private readonly IJuguetesLogica juguetesLogica;
+        private readonly IFabricantesLogica fabricantesLogica;
+        private readonly ICategoriasLogica categoriasLogica;
 
-        public JuguetesController(IJuguetesLogica juguetesLogica)
+
+        public JuguetesController(IJuguetesLogica juguetesLogica
+            , IFabricantesLogica fabricantesLogica
+            , ICategoriasLogica categoriasLogica)
         {
             this.juguetesLogica = juguetesLogica;
+            this.fabricantesLogica = fabricantesLogica;
+            this.categoriasLogica = categoriasLogica;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? FabricanteId)
         {
-            var juguetes = juguetesLogica.Obtener();
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.FabricanteIdSeleccionado = FabricanteId ?? 0;
+
+            List<Juguete> juguetes;
+            if (FabricanteId.HasValue)
+            {
+                juguetes = juguetesLogica.ObtenerPorFabricanteId(FabricanteId.Value);
+            }
+            else
+            {
+                juguetes = juguetesLogica.Obtener(incluirCategorias:true);
+            }
+
             return View(juguetes);
         }
 
         //Agregar
         public IActionResult Agregar()
         {
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+
             return View();
         }
 
@@ -30,9 +52,17 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Agregar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
-                return View(jugueteVM);
+            {
+                ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+                ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+                ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
 
-            juguetesLogica.Agregar(jugueteVM.ToEntity());
+                return View(jugueteVM);
+            }
+            var juguete = jugueteVM.ToEntity();
+            juguete.Categorias = categoriasLogica.ObtenerPorIds(jugueteVM.CategoriaIds);
+
+            juguetesLogica.Agregar(juguete);
             return RedirectToAction("Index");
         }
 
@@ -49,6 +79,10 @@ namespace Clase6.EF.Web.Controllers
             if (juguete == null)
                 return NotFound();
 
+            ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+            ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+            ViewBag.CategoriaIdsSeleccionados = juguete.Categorias.Select(c => c.Id).ToList();
+
             return View(JugueteViewModel.FromEntity(juguete));
         }
 
@@ -56,7 +90,13 @@ namespace Clase6.EF.Web.Controllers
         public IActionResult Editar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
+                ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+                ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
+
                 return View(jugueteVM);
+            }
 
             var juguete = juguetesLogica.ObtenerPorId(jugueteVM.Id);
             if (juguete == null)
@@ -65,6 +105,8 @@ namespace Clase6.EF.Web.Controllers
             juguete.Nombre = jugueteVM.Nombre;
             juguete.Precio = jugueteVM.Precio;
             juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
+            juguete.FabricanteId = jugueteVM.FabricanteId;
+            juguete.Categorias = categoriasLogica.ObtenerPorIds(jugueteVM.CategoriaIds);
 
             juguetesLogica.Actualizar(juguete);
             return RedirectToAction("Index");

@@ -19,12 +19,42 @@
 @model IEnumerable<Clase6.EF.Entidades.Juguete>
 
 <h1>Juguetes</h1>
+
+@* select option FabricanteId y boton Filtrar *@
+<form method="get" class="mb-3">
+    <div class="form-group">
+        <label for="fabricanteId">Filtrar por Fabricante:</label>
+        <select name="fabricanteId" id="fabricanteId" class="form-control">
+            <option value="">Todos</option>
+            @foreach (var fabricante in ViewBag.Fabricantes)
+            {
+                if ((int)ViewBag.FabricanteIdSeleccionado == fabricante.Id)
+                {
+                    <option value="@fabricante.Id" selected>@fabricante.Nombre</option>
+                }
+                else
+                {
+                    <option value="@fabricante.Id">@fabricante.Nombre</option>
+                }
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+</form>
+
+
+<div class="mb-3">
+    <a href="/juguetes/agregar" class="btn btn-primary">Crear Nuevo Juguete</a>
+</div>
+
 <table class="table" id="tblJuguetes">
     <thead>
         <tr>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Edad Recomendada</th>
+            <th>Fabricante</th>
+            <th>Categorías</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -35,6 +65,17 @@
                 <td><a href="/juguetes/editar/@juguete.Id">@juguete.Nombre</a></td>
                 <td>@juguete.Precio</td>
                 <td>@juguete.EdadRecomendada</td>
+                <td>@juguete.Fabricante?.Nombre</td>
+                <td>
+                    @if (juguete.Categorias != null && juguete.Categorias.Any())
+                    {
+                        @string.Join(", ", juguete.Categorias.OrderBy(c=>c.Nombre).Select(c => c.Nombre))
+                    }
+                    else
+                    {
+                        <em>-</em>
+                    }
+                </td>
                 <td><a href="/juguetes/eliminar/@juguete.Id">Eliminar</a></td>
             </tr>
         }

@@ -3,6 +3,7 @@ using Clase6.EF.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    partial class JugueteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260527232011_AgregarCategorias")]
+    partial class AgregarCategorias
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,24 +53,7 @@ namespace Clase6.EF.Entidades.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Construcción"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Acción"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Muñecas"
-                        });
+                    b.ToTable("Categoria");
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Fabricante", b =>

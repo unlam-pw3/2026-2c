@@ -24,6 +24,25 @@
         <input asp-for="EdadRecomendada" class="form-control" />
         <span asp-validation-for="EdadRecomendada" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label asp-for="FabricanteId"></label>
+        <select asp-for="FabricanteId" class="form-control" asp-items="@(new SelectList(ViewBag.Fabricantes, "Id", "Nombre"))">
+            <option value="">Seleccione un fabricante</option>
+        </select>
+        <span asp-validation-for="FabricanteId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Categorías</label>
+        <div>
+            @foreach (var categoria in ViewBag.Categorias)
+            {
+                <div class="form-check form-check-inline">
+                    <input class="form-check accept-policy" type="checkbox" name="CategoriaIds" value="@categoria.Id" />
+                    <label class="form-checkaccept-policy" for="CategoriaIds">@categoria.Nombre</label>
+                </div>
+            }
+        </div>
+    </div>
     <button type="submit" class="btn btn-primary">Agregar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>

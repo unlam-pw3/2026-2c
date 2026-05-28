@@ -3,6 +3,7 @@ using Clase6.EF.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    partial class JugueteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260527225352_AgregarFabricantesIniciales")]
+    partial class AgregarFabricantesIniciales
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,55 +23,6 @@ namespace Clase6.EF.Entidades.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CategoriaJuguete", b =>
-                {
-                    b.Property<int>("CategoriasId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("JuguetesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CategoriasId", "JuguetesId");
-
-                    b.HasIndex("JuguetesId");
-
-                    b.ToTable("CategoriaJuguete");
-                });
-
-            modelBuilder.Entity("Clase6.EF.Entidades.Categoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categorias");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nombre = "Construcción"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Nombre = "Acción"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Nombre = "Muñecas"
-                        });
-                });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Fabricante", b =>
                 {
@@ -139,21 +93,6 @@ namespace Clase6.EF.Entidades.Migrations
                     b.HasIndex("FabricanteId");
 
                     b.ToTable("Juguetes");
-                });
-
-            modelBuilder.Entity("CategoriaJuguete", b =>
-                {
-                    b.HasOne("Clase6.EF.Entidades.Categoria", null)
-                        .WithMany()
-                        .HasForeignKey("CategoriasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Clase6.EF.Entidades.Juguete", null)
-                        .WithMany()
-                        .HasForeignKey("JuguetesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Juguete", b =>
