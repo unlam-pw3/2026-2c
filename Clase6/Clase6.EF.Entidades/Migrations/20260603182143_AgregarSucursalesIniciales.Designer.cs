@@ -3,6 +3,7 @@ using Clase6.EF.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    partial class JugueteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260603182143_AgregarSucursalesIniciales")]
+    partial class AgregarSucursalesIniciales
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

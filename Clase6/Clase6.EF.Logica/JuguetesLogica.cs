@@ -22,16 +22,20 @@ public class JuguetesLogica : IJuguetesLogica
     }
     public List<Juguete> Obtener(bool incluirCategorias = false)
     {
-        if(incluirCategorias)
-            return db.Juguetes.Include(j => j.Categorias).ToList();
+        if (incluirCategorias)
+        {
+        return db.Juguetes.Include(j => j.Categorias).Include(j => j.Sucursal).ToList();
+        }
 
-        return db.Juguetes.ToList();
+        return db.Juguetes.Include(j => j.Sucursal).ToList();
+
     }
 
     public Juguete? ObtenerPorId(int id)
     {
         return db.Juguetes
             .Include(j => j.Categorias)
+            .Include(j => j.Sucursal)
             .FirstOrDefault(j => j.Id == id);
     }
 
@@ -60,6 +64,7 @@ public class JuguetesLogica : IJuguetesLogica
     {
         return db.Juguetes
             .Include(j => j.Categorias)
+            .Include(j => j.Sucursal)
             .Where(j => j.FabricanteId == fabricanteId)
             .ToList();
     }

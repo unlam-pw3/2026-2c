@@ -55,6 +55,7 @@
             <th>Edad Recomendada</th>
             <th>Fabricante</th>
             <th>Categorías</th>
+            <th>Sucursal</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -76,6 +77,7 @@
                         <em>-</em>
                     }
                 </td>
+                <td>@juguete.Sucursal?.Nombre</td>
                 <td><a href="/juguetes/eliminar/@juguete.Id">Eliminar</a></td>
             </tr>
         }
