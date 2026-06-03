@@ -10,15 +10,17 @@ namespace Clase6.EF.Web.Controllers
         private readonly IJuguetesLogica juguetesLogica;
         private readonly IFabricantesLogica fabricantesLogica;
         private readonly ICategoriasLogica categoriasLogica;
-
+        private readonly ISucursalesLogica sucursalesLogica;
 
         public JuguetesController(IJuguetesLogica juguetesLogica
             , IFabricantesLogica fabricantesLogica
-            , ICategoriasLogica categoriasLogica)
+            , ICategoriasLogica categoriasLogica
+            , ISucursalesLogica sucursalesLogica)
         {
             this.juguetesLogica = juguetesLogica;
             this.fabricantesLogica = fabricantesLogica;
             this.categoriasLogica = categoriasLogica;
+            this.sucursalesLogica = sucursalesLogica;
         }
 
         public IActionResult Index(int? FabricanteId)
@@ -44,6 +46,7 @@ namespace Clase6.EF.Web.Controllers
         {
             ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
             ViewBag.Categorias = categoriasLogica.ObtenerTodos();
+            ViewBag.Sucursales = sucursalesLogica.ObtenerTodos();
 
             return View();
         }
@@ -56,6 +59,8 @@ namespace Clase6.EF.Web.Controllers
                 ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
                 ViewBag.Categorias = categoriasLogica.ObtenerTodos();
                 ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
+                ViewBag.Sucursales = sucursalesLogica.ObtenerTodos();
+                ViewBag.SucursalIdSeleccionada = jugueteVM.SucursalId;
 
                 return View(jugueteVM);
             }
@@ -82,6 +87,7 @@ namespace Clase6.EF.Web.Controllers
             ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
             ViewBag.Categorias = categoriasLogica.ObtenerTodos();
             ViewBag.CategoriaIdsSeleccionados = juguete.Categorias.Select(c => c.Id).ToList();
+            ViewBag.Sucursales = sucursalesLogica.ObtenerTodos();
 
             return View(JugueteViewModel.FromEntity(juguete));
         }
@@ -94,6 +100,7 @@ namespace Clase6.EF.Web.Controllers
                 ViewBag.Fabricantes = fabricantesLogica.ObtenerTodos();
                 ViewBag.Categorias = categoriasLogica.ObtenerTodos();
                 ViewBag.CategoriaIdsSeleccionados = jugueteVM.CategoriaIds;
+                ViewBag.Sucursales = sucursalesLogica.ObtenerTodos();
 
                 return View(jugueteVM);
             }
@@ -107,6 +114,7 @@ namespace Clase6.EF.Web.Controllers
             juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
             juguete.FabricanteId = jugueteVM.FabricanteId;
             juguete.Categorias = categoriasLogica.ObtenerPorIds(jugueteVM.CategoriaIds);
+            juguete.SucursalId = jugueteVM.SucursalId;
 
             juguetesLogica.Actualizar(juguete);
             return RedirectToAction("Index");

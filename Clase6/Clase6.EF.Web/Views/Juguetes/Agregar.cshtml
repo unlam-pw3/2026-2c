@@ -43,6 +43,14 @@
             }
         </div>
     </div>
+    <div class="form-group">
+        <label asp-for="SucursalId"></label>
+        <select asp-for="SucursalId" class="form-control" asp-items="@(new SelectList(ViewBag.Sucursales, "Id", "Nombre"))">
+            <option value="">Seleccione una sucursal</option>
+        </select>
+        <span asp-validation-for="SucursalId" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Agregar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>
