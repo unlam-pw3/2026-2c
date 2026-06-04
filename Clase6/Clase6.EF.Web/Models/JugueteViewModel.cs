@@ -8,7 +8,6 @@ public class JugueteViewModel
     public string Nombre { get; set; }
     public decimal Precio { get; set; }
     public int EdadRecomendada { get; set; }
-
     public int FabricanteId { get; set; }
     public List<int> CategoriaIds { get; set; } = new();
 
