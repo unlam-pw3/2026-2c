@@ -10,12 +10,24 @@ namespace Clase6.EF.Web.Controllers;
 [ApiController]
 public class FabricantesController : ControllerBase
 {
-    //di
     private readonly IFabricantesLogica _fabricantesLogica;
     public FabricantesController(IFabricantesLogica fabricantesLogica)
     {
         _fabricantesLogica = fabricantesLogica;
     }
+
+    [HttpGet("prueba")]
+    public string prueba()
+    {
+        return "hola";
+    }
+
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public string MetodoOculto()
+    {
+        return "hola";
+    }
+
 
     [HttpGet]
     [SwaggerOperation(
