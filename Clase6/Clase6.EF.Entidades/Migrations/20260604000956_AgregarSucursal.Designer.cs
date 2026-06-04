@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    [Migration("20260603182143_AgregarSucursalesIniciales")]
-    partial class AgregarSucursalesIniciales
+    [Migration("20260604000956_AgregarSucursal")]
+    partial class AgregarSucursal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
