@@ -1,0 +1,25 @@
+name: Clase6 Tests
+
+on:
+  push:
+    paths:
+      - 'Clase6/**'
+
+  pull_request:
+    paths:
+      - 'Clase6/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - run: dotnet restore Clase6/Clase6.sln
+      - run: dotnet build Clase6/Clase6.sln --configuration Release --no-restore
+      - run: dotnet test Clase6/Clase6.sln --configuration Release --no-build
