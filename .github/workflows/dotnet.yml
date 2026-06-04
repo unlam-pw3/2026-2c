@@ -9,6 +9,8 @@ on:
     paths:
       - 'Clase6/**'
 
+  workflow_dispatch:
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,5 +23,5 @@ jobs:
           dotnet-version: '9.0.x'
 
       - run: dotnet restore Clase6/Clase6.sln
-      - run: dotnet build Clase6/Clase6.sln --configuration Release --no-restore
-      - run: dotnet test Clase6/Clase6.sln --configuration Release --no-build
+      - run: dotnet build Clase6/Clase6.sln --no-restore
+      - run: dotnet test Clase6/Clase6.sln --no-build
