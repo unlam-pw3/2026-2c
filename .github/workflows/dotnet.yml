@@ -22,6 +22,6 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - run: dotnet restore Clase6/Clase6.sln
-      - run: dotnet build Clase6/Clase6.sln --no-restore
-      - run: dotnet test Clase6/Clase6.sln --no-build
+      - run: dotnet restore Clase6/Clase6.EF.Web.sln
+      - run: dotnet build Clase6/Clase6.EF.Web.sln --no-restore
+      - run: dotnet test Clase6/Clase6.EF.Web.sln --no-build
