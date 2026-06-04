@@ -10,6 +10,7 @@ public class JugueteViewModel
     public int EdadRecomendada { get; set; }
     public int FabricanteId { get; set; }
     public List<int> CategoriaIds { get; set; } = new();
+    public int SucursalId { get; set; }
 
     public Juguete ToEntity()
     {
@@ -19,7 +20,8 @@ public class JugueteViewModel
             Nombre = this.Nombre,
             Precio = this.Precio,
             EdadRecomendada = this.EdadRecomendada,
-            FabricanteId = this.FabricanteId
+            FabricanteId = this.FabricanteId,
+            SucursalId = this.SucursalId
         };
     }
 
@@ -32,7 +34,8 @@ public class JugueteViewModel
             Precio = juguete.Precio,
             EdadRecomendada = juguete.EdadRecomendada,
             FabricanteId = juguete.FabricanteId ?? 0,
-            CategoriaIds = juguete.Categorias.Select(c => c.Id).ToList()
+            CategoriaIds = juguete.Categorias.Select(c => c.Id).ToList(),
+            SucursalId = juguete.Sucursal?.Id ?? 0
         };
     }
 }

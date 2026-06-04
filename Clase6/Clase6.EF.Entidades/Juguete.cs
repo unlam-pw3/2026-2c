@@ -8,7 +8,9 @@ public class Juguete
     public decimal Precio { get; set; }
     public int EdadRecomendada { get; set; }
     public int? FabricanteId { get; set; }
+    public int? SucursalId { get; set; }
     public Fabricante? Fabricante { get; set; }
+    public Sucursal? Sucursal { get; set; }
     public List<Categoria> Categorias { get; set; } = new();
 }
 
