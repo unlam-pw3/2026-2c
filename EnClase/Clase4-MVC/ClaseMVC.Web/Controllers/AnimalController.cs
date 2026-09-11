@@ -36,12 +36,13 @@ public class AnimalController : ControllerBase
         return animal;
     }
 
-    // POST api/<AnimalController>
+    /* POST api/<AnimalController>
     [HttpPost]
     public void Post([FromBody] Animal animal)
     {
         _animalesServicios.Agregar(animal);
     }
+    */
 
     // PUT api/<AnimalController>
     [HttpPut("{id}")]
