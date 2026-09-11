@@ -2,6 +2,7 @@
 
 public class Animal
 {
+    public string imagenUrl { get; set; }
     public int Id { get; set; }
     public string Raza { get; set; }
     public double Peso { get; set; }

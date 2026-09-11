@@ -1,14 +1,15 @@
 ﻿using ClaseMVC.Entidades;
+using ClaseMVC.Logica.Exceptions;
 
 namespace ClaseMVC.Logica;
 
 public interface IAnimalesServicios
 {
     void Actualizar(Animal animal);
-    void Agregar(Animal animal);
     List<Animal> Listar();
     Animal? ObtenerPorId(int id);
-
+    public void RegistrarAnimal(Animal animal, string nombreArchivoOriginal, Stream stream, string ruta);
+  
     void Eliminar(int id);
 }
 public class AnimalesServicios : IAnimalesServicios
@@ -39,13 +40,44 @@ public class AnimalesServicios : IAnimalesServicios
         }
     }
 
-    public void Agregar(Animal animal)
+   
+
+    public void RegistrarAnimal(Animal animal, string nombreArchivoOriginal, Stream stream, string ruta)
     {
+        string extensionOriginal = Path.GetExtension(nombreArchivoOriginal.ToLower());
+        ValidarExtension(extensionOriginal);
+        string nombreArchivo = Guid.NewGuid().ToString() + extensionOriginal;
+        string rutaFinal = Path.Combine(ruta, nombreArchivo);
+        GuardarArchivo(stream, rutaFinal);
+        Agregar(animal, nombreArchivo);
+
+    }
+
+    public void ValidarExtension(string extensionOriginal)
+    {
+        string[] extensionesPermitidas = { ".jpg", ".jpeg", ".png", ".webp" };
+        if (!extensionesPermitidas.Contains(extensionOriginal))
+        {
+            throw new ValidacionImagenException("Solo se permiten imágenes (JPG, PNG, JPEG, WEBP)");
+        }
+    }
+    public void GuardarArchivo(Stream stream, string ruta)
+    {
+        using (var streamDestino = new FileStream(ruta, FileMode.Create))
+        {
+            stream.CopyTo(streamDestino);
+        }
+    }
+
+    private void Agregar(Animal animal, string nombreArchivo)
+    {
+        animal.ImagenUrl = "/img/" + nombreArchivo;
         int nuevoId = lista.Count > 0 ? lista.Max(a => a.Id) + 1 : 1;
         animal.Id = nuevoId;
 
         lista.Add(animal);
     }
+
 
     public void Eliminar(int id)
     {
