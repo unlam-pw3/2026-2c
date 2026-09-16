@@ -10,19 +10,28 @@
     <input type="hidden" name="Id" value="@Model.Id" />
     <div class="form-group">
         <label for="Raza">Raza</label>
-        <input type="text" class="form-control" id="Raza" name="Raza" value="@Model.Raza" required />
+        <input asp-for="Raza" class="form-control" />
+        <span asp-validation-for="Raza" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="Peso">Peso</label>
-        <input type="number" class="form-control" id="Peso" name="Peso" value="@Model.Peso" required />
+        <input asp-for="Peso" class="form-control" />
+        <span asp-validation-for="Peso" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="EdadEstimada">Edad Estimada</label>
-        <input type="number" class="form-control" id="EdadEstimada" name="EdadEstimada" value="@Model.EdadEstimada" required />
+        <input asp-for="EdadEstimada" class="form-control" />
+        <span asp-validation-for="EdadEstimada" class="text-danger"></span>
     </div>
     <div class="form-group form-check">
         <input asp-for="EnExtincion" class="form-check-input" />
         <label class="form-check-label" for="EnExtincion">En Extinción</label>
+    </div>
+    <div class="form-group">
+        <img src="@Model.ImagenUrl" alt="Imagen del animal" class="img-thumbnail mb-2" style="max-width: 200px;" />
+        <label for="ImagenUrl">Imagen</label>
+        <input asp-for="ImagenUrl" class="form-control" />
+        <span asp-validation-for="ImagenUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
@@ -30,3 +39,6 @@
     </div>
 </form>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

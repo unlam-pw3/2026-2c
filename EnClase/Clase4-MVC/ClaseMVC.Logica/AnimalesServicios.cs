@@ -36,6 +36,7 @@ public class AnimalesServicios : IAnimalesServicios
             animalDB.Peso = animal.Peso;
             animalDB.EdadEstimada = animal.EdadEstimada;
             animalDB.EnExtincion = animal.EnExtincion;
+            animalDB.ImagenUrl = animal.ImagenUrl;
         }
     }
 

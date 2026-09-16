@@ -33,6 +33,9 @@ public class AnimalesController : Controller
     [HttpPost]
     public IActionResult Agregar(Animal animal)
     {
+        if (!ModelState.IsValid)
+            return View(animal);
+
         _animalesServicios.Agregar(animal);
         return RedirectToAction("Index");
     }
