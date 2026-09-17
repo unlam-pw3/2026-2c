@@ -5,9 +5,15 @@
 
 
 <h1>Animales</h1>
-@* listado de animales con raza, peso, edad estimada y si esta en extincion *@
-
 <a href="/animales/agregar" class="btn btn-primary mb-3">Agregar Animal</a>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success" style="color:red">
+        @TempData["Mensaje"]
+    </div>
+}
+
 <table class="table">
     <thead>
         <tr>

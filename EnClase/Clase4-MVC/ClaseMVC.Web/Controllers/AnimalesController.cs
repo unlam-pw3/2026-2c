@@ -49,6 +49,16 @@ public class AnimalesController : Controller
         {
             return NotFound();
         }
+        //viewbag
+        //viewdata
+        //tempdata --> tiempo de vida + 1 request (1 redirect)
+
+        //mock de datos
+        //datos actualizados de una api de cuantos ejemplares quedan a nivel mundial
+
+        ViewBag.CantidadEjemplares = new Random().Next(2500);
+        //ViewData["CantidadEjemplares"] = new Random().Next(2500);
+        //TempData["CantidadEjemplares"] = new Random().Next(2500);
 
         return View(animal);
     }
@@ -73,6 +83,7 @@ public class AnimalesController : Controller
         {
             return NotFound();
         }
+        TempData["Mensaje"] = $"El animal {animal.Raza} ha sido eliminado correctamente.";
 
         _animalesServicios.Eliminar(id);
 
