@@ -7,11 +7,11 @@ namespace ClaseMVC.Web.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AnimalController : ControllerBase
+public class AnimalApiController : ControllerBase
 {
     private readonly IAnimalesServicios _animalesServicios;
 
-    public AnimalController(IAnimalesServicios animalesServicios)
+    public AnimalApiController(IAnimalesServicios animalesServicios)
     {
         _animalesServicios = animalesServicios;
     }

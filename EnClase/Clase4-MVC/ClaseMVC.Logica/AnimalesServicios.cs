@@ -10,6 +10,9 @@ public interface IAnimalesServicios
     Animal? ObtenerPorId(int id);
 
     void Eliminar(int id);
+
+    Animal? Buscar(string raza);
+
 }
 public class AnimalesServicios : IAnimalesServicios
 {
@@ -46,6 +49,14 @@ public class AnimalesServicios : IAnimalesServicios
         animal.Id = nuevoId;
 
         lista.Add(animal);
+    }
+
+    public Animal? Buscar(string raza) {
+
+        if (string.IsNullOrWhiteSpace(raza))
+            return null;
+
+        return lista.Find(a => a.Raza.ToLower().Contains(raza.ToLower()));
     }
 
     public void Eliminar(int id)

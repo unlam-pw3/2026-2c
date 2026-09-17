@@ -22,8 +22,6 @@ public class AnimalesController : Controller
     }
 
     //Agregar
-
-
     [HttpGet]
     public IActionResult Agregar()
     {
@@ -40,6 +38,8 @@ public class AnimalesController : Controller
         return RedirectToAction("Index");
     }
 
+
+    //Editar
     [HttpGet]
     public IActionResult Editar(int id)
     {
@@ -75,6 +75,7 @@ public class AnimalesController : Controller
         return RedirectToAction("Index");
     }
 
+    //Eliminar
     [HttpGet]
     public IActionResult Eliminar(int id)
     {
@@ -88,5 +89,21 @@ public class AnimalesController : Controller
         _animalesServicios.Eliminar(id);
 
         return RedirectToAction("Index");
+    }
+
+    //Buscar
+    [HttpGet]
+    public IActionResult Buscar(string raza) {
+
+        if (string.IsNullOrWhiteSpace(raza)) {
+            return RedirectToAction("Index");
+        }
+
+        var animal = _animalesServicios.Buscar(raza);
+        ViewBag.Raza = raza;
+        ViewBag.AnimalBuscado = animal;
+
+        var animales = _animalesServicios.Listar();
+        return View("Index", animales);
     }
 }

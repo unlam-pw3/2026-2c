@@ -7,12 +7,13 @@
 <h1>Animales</h1>
 <a href="/animales/agregar" class="btn btn-primary mb-3">Agregar Animal</a>
 
-@if (TempData["Mensaje"] != null)
-{
-    <div class="alert alert-success" style="color:red">
-        @TempData["Mensaje"]
-    </div>
-}
+<hr />
+
+
+<partial name="_pvPartialBusqueda"/>
+
+<hr />
+
 
 <table class="table">
     <thead>
