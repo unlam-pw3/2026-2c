@@ -6,6 +6,10 @@
 
 <h1>Editar Animal</h1>
 
+<div>
+    <p>Los nacimientos del ultimos mes fueron de @ViewBag.NacimientosUltimoMes </p>
+</div>
+
 <form action="@Url.Action("Editar", "Animales")" method="post">
     <input type="hidden" name="Id" value="@Model.Id" />
 

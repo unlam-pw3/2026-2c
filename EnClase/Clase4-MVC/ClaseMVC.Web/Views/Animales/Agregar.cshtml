@@ -7,7 +7,9 @@
 
 <h1>Agregar Animal</h1>
 <a href="/animales" class="btn btn-secondary mb-3">Volver</a>
-
+    <div>
+    <p>Los nacimientos del ultimos mes fueron de @ViewBag.NacimientosUltimoMes  </p>
+  </div>
 <form action="@Url.Action("Agregar", "Animales")" method="post">
     <div class="form-group">
         <label for="Raza">Raza</label>

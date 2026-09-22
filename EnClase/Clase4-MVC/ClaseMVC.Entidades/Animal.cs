@@ -15,4 +15,12 @@ public class Animal
     [Required(ErrorMessage = "La URL de la imagen es obligatoria.")]
     [StringLength(2000, MinimumLength = 1, ErrorMessage = "La URL de la imagen debe tener entre 1 y 200 caracteres.")]
     public string ImagenUrl { get; set; }
+    [Required (ErrorMessage="El habitat es obligatorio")]
+    [StringLength(200, ErrorMessage ="El habitat no debe superar los 200 caracteres.")]
+    public string Habitat {  get; set; }
+    [Range(0.01,1000)]
+    public double? Largo {  get; set; }
+    [StringLength(500)]
+    public string SignificadoNombre { get; set; }
+
 }
