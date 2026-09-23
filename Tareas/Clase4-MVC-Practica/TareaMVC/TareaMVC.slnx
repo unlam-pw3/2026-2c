@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="TareaMVC.Entidades/TareaMVC.Entidades.csproj" />
+  <Project Path="TareaMVC.Logica/TareaMVC.Logica.csproj" />
+  <Project Path="TareaMVC.Web/TareaMVC.Web.csproj" />
+</Solution>

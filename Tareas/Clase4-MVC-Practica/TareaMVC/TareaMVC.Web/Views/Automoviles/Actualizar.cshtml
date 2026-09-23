@@ -1,0 +1,28 @@
+@model Automovil
+
+<h1>Actualizar Automóvil</h1>
+
+<form asp-action="Actualizar" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="Marca"></label>
+        <input asp-for="Marca" class="form-control" />
+        <span asp-validation-for="Marca" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Modelo"></label>
+        <input asp-for="Modelo" class="form-control" />
+        <span asp-validation-for="Modelo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Anio"></label>
+        <input asp-for="Anio" class="form-control" />
+        <span asp-validation-for="Anio" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input asp-for="EsNuevo" class="form-check-input" />
+        <label asp-for="EsNuevo" class="form-check-label"></label>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
