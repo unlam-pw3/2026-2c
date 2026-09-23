@@ -1,4 +1,4 @@
-﻿@model ClaseMVC.Entidades.Animal
+﻿@model ClaseMVC.Web.Models.AnimalViewModel
 @{
     Layout = "_LayoutAnimales";
 }
@@ -38,6 +38,21 @@
     <div class="form-group form-check">
         <input asp-for="EnExtincion" class="form-check-input" />
         <label class="form-check-label" for="EnExtincion">En Extinción</label>
+    </div>
+    <div class="form-group">
+        <label for="Habitat">Habitat</label>
+        <input asp-for="Habitat" class="form-control" />
+        <span asp-validation-for="Habitat" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="Largo">Largo</label>
+        <input asp-for="Largo" class="form-control" />
+        <span asp-validation-for="Largo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="SignificadoNombre">Significado Nombre</label>
+        <input asp-for="SignificadoNombre" class="form-control" />
+        <span asp-validation-for="SignificadoNombre" class="text-danger"></span>
     </div>
     <div class="form-group">
         <img src="@Model.ImagenUrl" alt="Imagen del animal" class="img-thumbnail mb-2" style="max-width: 200px;" />

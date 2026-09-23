@@ -1,4 +1,4 @@
-﻿@model List<ClaseMVC.Entidades.Animal>
+﻿@model List<ClaseMVC.Web.Models.AnimalViewModel>
 @{
     Layout = "_LayoutAnimales2Secciones";
 }
@@ -27,6 +27,9 @@
             <th>Raza</th>
             <th>Peso</th>
             <th>Edad Estimada</th>
+            <th>Habitat</th>
+            <th>Largo</th>
+            <th>Significado</th>
             <th>En Extinción</th>
             <th>Eliminar</th>
         </tr>
@@ -38,6 +41,9 @@
                 <td><partial name="_pvAnimalAvatar" model="animal" /></td>
                 <td>@animal.Peso</td>
                 <td>@animal.EdadEstimada</td>
+                <td>@animal.Habitat</td>
+                <td>@(animal.Largo.HasValue ? animal.Largo.Value.ToString() : "-")</td>
+                <td>@animal.SignificadoNombre</td>
                 <td>@(animal.EnExtincion ? "Sí" : "No")</td>
                 <td>
                     <a href="/animales/eliminar/@animal.Id" class="btn btn-danger">Eliminar</a>

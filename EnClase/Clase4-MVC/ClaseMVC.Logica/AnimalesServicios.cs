@@ -37,6 +37,9 @@ public class AnimalesServicios : IAnimalesServicios
             animalDB.EdadEstimada = animal.EdadEstimada;
             animalDB.EnExtincion = animal.EnExtincion;
             animalDB.ImagenUrl = animal.ImagenUrl;
+            animalDB.Habitat = animal.Habitat;
+            animalDB.Largo = animal.Largo;
+            animalDB.SignificadoNombre = animal.SignificadoNombre;
         }
     }
 
