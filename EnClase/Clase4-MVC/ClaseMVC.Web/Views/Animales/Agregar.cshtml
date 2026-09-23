@@ -30,6 +30,24 @@
         <input asp-for="EnExtincion" class="form-check-input" />
         <label class="form-check-label" for="EnExtincion">En Extinción</label>
     </div>
+    <div>
+        <label for="Habitat">Habitat</label>
+        <input asp-for="Habitat" class="form-control" />
+        <span asp-validation-for="Habitat" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="Largo">Largo</label>
+        <input asp-for="Largo" class="form-control" />
+        <span asp-validation-for="Largo" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label for="SignificadoNombre">SignificadoNombre</label>
+        <input asp-for="SignificadoNombre" class="form-control" />
+        <span asp-validation-for="SignificadoNombre" class="text-danger"></span>
+    </div>
+
      <div class="form-group form-check">
        <label for="ImagenUrl">Imagen</label>
         <input asp-for="ImagenUrl" class="form-control" />
