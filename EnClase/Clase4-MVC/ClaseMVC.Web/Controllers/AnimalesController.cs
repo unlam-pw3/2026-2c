@@ -3,8 +3,7 @@ using System.Linq;
 using ClaseMVC.Entidades;
 using ClaseMVC.Logica;
 using ClaseMVC.Web.Models;
-using ClaseMVC.Web.Extensions;
-using Microsoft.AspNetCore.Http;
+using ClaseMVC.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClaseMVC.Web.Controllers;
@@ -12,9 +11,12 @@ namespace ClaseMVC.Web.Controllers;
 public class AnimalesController : Controller
 {
     private readonly IAnimalesServicios _animalesServicios;
-    public AnimalesController(IAnimalesServicios animalesServicios)
+    private readonly IRecientesService _recientesService;
+
+    public AnimalesController(IAnimalesServicios animalesServicios, IRecientesService recientesService)
     {
         _animalesServicios = animalesServicios;
+        _recientesService = recientesService;
     }
 
     public IActionResult Index()
@@ -32,8 +34,8 @@ public class AnimalesController : Controller
         // map to viewmodels
         var vms = animales.Select(a => a.ToViewModel()).ToList();
 
-        // Load recently viewed from session (list of ids)
-        var recientesIds = HttpContext.Session.GetObject<List<int>>("Recientes") ?? new List<int>();
+        // Load recently viewed from session (list of ids) via service
+        var recientesIds = _recientesService.ObtenerRecientes();
         var recientes = recientesIds
             .Select(id => _animalesServicios.ObtenerPorId(id))
             .Where(a => a != null)
@@ -96,13 +98,8 @@ public class AnimalesController : Controller
         vm.CantidadEjemplares = (int)ViewBag.CantidadEjemplares;
         vm.NacimientosUltimoMes = (int)ViewBag.NacimientosUltimoMes;
 
-        // Update session: recientes vistos (maintain up to 5)
-        var recientes = HttpContext.Session.GetObject<List<int>>("Recientes") ?? new List<int>();
-        // remove existing occurrence
-        recientes.RemoveAll(x => x == id);
-        recientes.Insert(0, id);
-        if (recientes.Count > 5) recientes = recientes.Take(5).ToList();
-        HttpContext.Session.SetObject("Recientes", recientes);
+        // Update recientes via service
+        _recientesService.AgregarReciente(id);
 
         return View(vm);
     }

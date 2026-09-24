@@ -14,6 +14,10 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// Register HTTP context accessor and recientes service
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ClaseMVC.Web.Services.IRecientesService, ClaseMVC.Web.Services.RecientesService>();
+
 builder.Services.AddSingleton<IAnimalesServicios, AnimalesServicios>();
 
 var app = builder.Build();
