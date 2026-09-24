@@ -7,6 +7,24 @@
 <h1>Animales</h1>
 <a href="/animales/agregar" class="btn btn-primary mb-3">Agregar Animal</a>
 
+@{
+    var recientes = ViewBag.Recientes as List<ClaseMVC.Web.Models.AnimalViewModel>;
+}
+@if (recientes != null && recientes.Count > 0)
+{
+    <div class="mb-3">
+        <h5>Recientemente vistos</h5>
+        <ul class="list-inline">
+            @foreach (var r in recientes)
+            {
+                <li class="list-inline-item">@* usa la parcial que contiene link a Editar *@
+                    <partial name="_pvAnimalAvatar" model="r" />
+                </li>
+            }
+        </ul>
+    </div>
+}
+
 @if (TempData["Mensaje"] != null)
 {
     <div class="alert alert-success" style="color:red">

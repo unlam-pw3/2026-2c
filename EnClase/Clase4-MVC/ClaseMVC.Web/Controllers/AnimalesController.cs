@@ -3,6 +3,8 @@ using System.Linq;
 using ClaseMVC.Entidades;
 using ClaseMVC.Logica;
 using ClaseMVC.Web.Models;
+using ClaseMVC.Web.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClaseMVC.Web.Controllers;
@@ -29,6 +31,17 @@ public class AnimalesController : Controller
         }
         // map to viewmodels
         var vms = animales.Select(a => a.ToViewModel()).ToList();
+
+        // Load recently viewed from session (list of ids)
+        var recientesIds = HttpContext.Session.GetObject<List<int>>("Recientes") ?? new List<int>();
+        var recientes = recientesIds
+            .Select(id => _animalesServicios.ObtenerPorId(id))
+            .Where(a => a != null)
+            .Select(a => a!.ToViewModel())
+            .ToList();
+
+        ViewBag.Recientes = recientes;
+
         return View(vms);
     }
 
@@ -82,6 +95,15 @@ public class AnimalesController : Controller
         var vm = animal.ToViewModel();
         vm.CantidadEjemplares = (int)ViewBag.CantidadEjemplares;
         vm.NacimientosUltimoMes = (int)ViewBag.NacimientosUltimoMes;
+
+        // Update session: recientes vistos (maintain up to 5)
+        var recientes = HttpContext.Session.GetObject<List<int>>("Recientes") ?? new List<int>();
+        // remove existing occurrence
+        recientes.RemoveAll(x => x == id);
+        recientes.Insert(0, id);
+        if (recientes.Count > 5) recientes = recientes.Take(5).ToList();
+        HttpContext.Session.SetObject("Recientes", recientes);
+
         return View(vm);
     }
 
