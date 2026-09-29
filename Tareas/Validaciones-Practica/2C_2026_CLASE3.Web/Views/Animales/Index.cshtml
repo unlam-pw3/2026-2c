@@ -1,5 +1,12 @@
 @model List<_2C_2026_CLASE3.Entidades.Animal>
 
+@if(TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
+
 <h1>Animales</h1>
 @*Listado de animales con raza, peso, edad estimada y si esta en extinción.*@
 
@@ -13,6 +20,10 @@
             <th>Peso</th>
             <th>Edad Estimada</th>
             <th>En Extinción</th>
+            <th>Habitat</th>
+            <th>Lugar de Origen</th>
+            <th>Largo</th>
+            <th>Alto</th>
             <th colspan="2">Acciones</th>
         </tr>
     </thead>
@@ -25,6 +36,10 @@
             <td>@animal.Peso</td>
             <td>@animal.EdadEstimada</td>
             <td>@(animal.EnExtincion ? "Si" : "No")</td>
+            <td>@animal.Habitat</td>
+            <td>@animal.LugarOrigen</td>
+            <td>@animal.Largo</td>
+            <td>@animal.Alto</td>
             <td><a asp-action="Editar" asp-route-id="@animal.Id">Editar</a></td>
             <td>
                 <form asp-action="Eliminar" asp-route-id="@animal.Id" method="post" class="d-inline">

@@ -20,10 +20,26 @@ public class AnimalesServicios : IAnimalesServicios
     {
         lista = new List<Animal>()
         {
-            new Animal() { Id = 1, Raza = "Perro", Peso = 20, EdadEstimada = 10, EnExtincion = false, UrlImagen = "/img/perro.png" },
-            new Animal() { Id = 2, Raza = "Gato", Peso = 5, EdadEstimada = 15, EnExtincion = false, UrlImagen = "/img/gato.png" },
-            new Animal() { Id = 3, Raza = "Tigre", Peso = 200, EdadEstimada = 20, EnExtincion = true, UrlImagen = "/img/tigre.png" },
-            new Animal() { Id = 4, Raza = "Elefante", Peso = 5000, EdadEstimada = 70, EnExtincion = true, UrlImagen = "/img/elefante.png" }
+            new Animal() 
+            { 
+                Id = 1, Raza = "Perro", Peso = 20, EdadEstimada = 10, EnExtincion = false, 
+                UrlImagen = "/img/perro.png", Habitat = "Doméstico", LugarOrigen = "Europa", Largo = 100, Alto = 60 
+            },
+            new Animal() 
+            { 
+                Id = 2, Raza = "Gato", Peso = 5, EdadEstimada = 15, EnExtincion = false, 
+                UrlImagen = "/img/gato.png", Habitat = "Doméstico", LugarOrigen = "Egipto", Largo = 50, Alto = 30 
+            },
+            new Animal() 
+            { 
+                Id = 3, Raza = "Tigre", Peso = 200, EdadEstimada = 20, EnExtincion = true, 
+                UrlImagen = "/img/tigre.png", Habitat = "Selva", LugarOrigen = "Asia", Largo = 300, Alto = 110 
+            },
+            new Animal() 
+            { 
+                Id = 4, Raza = "Elefante", Peso = 5000, EdadEstimada = 70, EnExtincion = true, 
+                UrlImagen = "/img/elefante.png", Habitat = "Sabana", LugarOrigen = "África", Largo = 600, Alto = 350 
+            }
         };
     }
     public List<Animal> Listar()
@@ -46,6 +62,10 @@ public class AnimalesServicios : IAnimalesServicios
             animalExistente.EdadEstimada = animal.EdadEstimada;
             animalExistente.EnExtincion = animal.EnExtincion;
             animalExistente.UrlImagen = animal.UrlImagen;
+            animalExistente.Habitat = animal.Habitat;
+            animalExistente.LugarOrigen = animal.LugarOrigen;
+            animalExistente.Largo = animal.Largo;
+            animalExistente.Alto = animal.Alto;
         }
     }
 

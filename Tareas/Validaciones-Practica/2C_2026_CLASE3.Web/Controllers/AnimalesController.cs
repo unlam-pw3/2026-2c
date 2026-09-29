@@ -28,14 +28,18 @@ public class AnimalesController : Controller
         {
             return NotFound();
         }
+        ViewBag.CantidadEjemplares = Random.Shared.Next(500, 5000);
+        ViewBag.Alto = animal.Alto;
         return View(animal);
     }
 
     [HttpPost]
     public IActionResult Editar(Animal animal)
     {
-        if (string.IsNullOrWhiteSpace(animal.Raza))
+        if (!ModelState.IsValid)
         {
+            ViewBag.CantidadEjemplares = Random.Shared.Next(500, 5000);
+            ViewBag.Alto = animal.Alto;
             return View(animal);
         }
         _animalesServicios.Editar(animal);
@@ -50,6 +54,7 @@ public class AnimalesController : Controller
         {
             return NotFound();
         }
+        TempData["Mensaje"] = $"Se eliminó el animal {animal.Raza} correctamente.";
         _animalesServicios.Eliminar(id);
         return RedirectToAction("Index");
     }
@@ -62,7 +67,7 @@ public class AnimalesController : Controller
     [HttpPost]
     public IActionResult Agregar(Animal animal)
     {
-        if (string.IsNullOrWhiteSpace(animal.Raza))
+        if (!ModelState.IsValid)
         {
             return View(animal);
         }
