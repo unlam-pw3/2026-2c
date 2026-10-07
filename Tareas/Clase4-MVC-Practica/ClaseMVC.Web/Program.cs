@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IAnimalesServicios, AnimalesServicios>();
 builder.Services.AddSingleton<IFloresServicios, FloresServicios>();
+builder.Services.AddSingleton<IAlimentosServicios, AlimentosServicios>();
 
 var app = builder.Build();
 //add singleton
