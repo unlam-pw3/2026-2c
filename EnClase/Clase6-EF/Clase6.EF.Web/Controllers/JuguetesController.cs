@@ -8,29 +8,39 @@ namespace Clase6.EF.Web.Controllers
     public class JuguetesController : Controller
     {
         private readonly IJuguetesLogica juguetesLogica;
+        private readonly ITematicaLogica tematicaLogica;
 
-        public JuguetesController(IJuguetesLogica juguetesLogica)
+        public JuguetesController(IJuguetesLogica juguetesLogica, ITematicaLogica tematicaLogica)
         {
             this.juguetesLogica = juguetesLogica;
+            this.tematicaLogica = tematicaLogica;
         }
 
         public IActionResult Index()
         {
             var juguetes = juguetesLogica.Obtener();
-            return View(juguetes);
+            var juguetesVM = juguetes.Select(j => JugueteViewModel.FromEntity(j)).ToList();
+
+            return View(juguetesVM);
         }
 
         //Agregar
         public IActionResult Agregar()
         {
-            return View();
+            var jugueteVM = new JugueteViewModel();
+            jugueteVM.Tematicas = tematicaLogica.Obtener();
+
+            return View(jugueteVM);
         }
 
         [HttpPost]
         public IActionResult Agregar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
+            {
+                jugueteVM.Tematicas = tematicaLogica.Obtener();
                 return View(jugueteVM);
+            }
 
             juguetesLogica.Agregar(jugueteVM.ToEntity());
             return RedirectToAction("Index");
@@ -49,14 +59,20 @@ namespace Clase6.EF.Web.Controllers
             if (juguete == null)
                 return NotFound();
 
-            return View(JugueteViewModel.FromEntity(juguete));
+            var jugueteVM = JugueteViewModel.FromEntity(juguete);
+            jugueteVM.Tematicas = tematicaLogica.Obtener();
+
+            return View(jugueteVM);
         }
 
         [HttpPost]
         public IActionResult Editar(JugueteViewModel jugueteVM)
         {
             if (!ModelState.IsValid)
+            {
+                jugueteVM.Tematicas = tematicaLogica.Obtener();
                 return View(jugueteVM);
+            }
 
             var juguete = juguetesLogica.ObtenerPorId(jugueteVM.Id);
             if (juguete == null)
@@ -65,6 +81,7 @@ namespace Clase6.EF.Web.Controllers
             juguete.Nombre = jugueteVM.Nombre;
             juguete.Precio = jugueteVM.Precio;
             juguete.EdadRecomendada = jugueteVM.EdadRecomendada;
+            juguete.TematicaId = jugueteVM.TematicaId;
 
             juguetesLogica.Actualizar(juguete);
             return RedirectToAction("Index");

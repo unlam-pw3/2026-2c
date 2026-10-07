@@ -1,5 +1,6 @@
 ﻿
 using Clase6.EF.Entidades;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clase6.EF.Logica;
 public interface IJuguetesLogica
@@ -20,7 +21,7 @@ public class JuguetesLogica : IJuguetesLogica
     }
     public List<Juguete> Obtener()
     {
-        return db.Juguetes.ToList();
+        return db.Juguetes.Include(j => j.Tematica).ToList();
     }
 
     public Juguete? ObtenerPorId(int id)

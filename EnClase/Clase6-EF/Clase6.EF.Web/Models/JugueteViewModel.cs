@@ -8,6 +8,9 @@ public class JugueteViewModel
     public string Nombre { get; set; }
     public decimal Precio { get; set; }
     public int EdadRecomendada { get; set; }
+    public IEnumerable<Tematica> Tematicas { get; set; } = new List<Tematica>();
+    public int TematicaId { get; set; }
+    public Tematica? Tematica { get; set; }
 
     public Juguete ToEntity()
     {
@@ -16,7 +19,8 @@ public class JugueteViewModel
             Id = this.Id,
             Nombre = this.Nombre,
             Precio = this.Precio,
-            EdadRecomendada = this.EdadRecomendada
+            EdadRecomendada = this.EdadRecomendada,
+            TematicaId = this.TematicaId
         };
     }
 
@@ -27,7 +31,9 @@ public class JugueteViewModel
             Id = juguete.Id,
             Nombre = juguete.Nombre,
             Precio = juguete.Precio,
-            EdadRecomendada = juguete.EdadRecomendada
+            EdadRecomendada = juguete.EdadRecomendada,
+            TematicaId = juguete.TematicaId,
+            Tematica = juguete.Tematica
         };
     }
 }

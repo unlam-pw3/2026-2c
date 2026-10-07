@@ -13,6 +13,7 @@ db.Database.Migrate();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IJuguetesLogica, JuguetesLogica>();
+builder.Services.AddScoped<ITematicaLogica, TematicaLogica>();
 
 //add JugueteriaDbContext
 builder.Services.AddDbContext<JugueteriaDbContext>();

@@ -24,6 +24,15 @@
         <input asp-for="EdadRecomendada" class="form-control" />
         <span asp-validation-for="EdadRecomendada" class="text-danger"></span>
     </div>
+
+    <div class="form-group">
+        <label asp-for="TematicaId"></label>
+        <select asp-for="TematicaId" class="form-control" asp-items="@(new SelectList(Model.Tematicas, "Id", "Nombre"))">
+            <option value="">Seleccione una temática</option>
+        </select>
+        <span asp-validation-for="TematicaId" class="text-danger"></span>
+    </div>
+
     <button type="submit" class="btn btn-primary">Agregar</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>
