@@ -3,6 +3,7 @@ using Clase6.EF.Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Clase6.EF.Entidades.Migrations
 {
     [DbContext(typeof(JugueteriaDbContext))]
-    partial class JugueteriaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261007223433_Agregando-Tematica")]
+    partial class AgregandoTematica
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,31 +52,6 @@ namespace Clase6.EF.Entidades.Migrations
                     b.ToTable("Juguetes");
                 });
 
-            modelBuilder.Entity("Clase6.EF.Entidades.Sucursal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sucursales");
-                });
-
             modelBuilder.Entity("Clase6.EF.Entidades.Tematica", b =>
                 {
                     b.Property<int>("Id")
@@ -88,22 +66,7 @@ namespace Clase6.EF.Entidades.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tematicas");
-                });
-
-            modelBuilder.Entity("JugueteSucursal", b =>
-                {
-                    b.Property<int>("JuguetesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SucursalesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("JuguetesId", "SucursalesId");
-
-                    b.HasIndex("SucursalesId");
-
-                    b.ToTable("JugueteSucursal");
+                    b.ToTable("Tematica");
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Juguete", b =>
@@ -115,21 +78,6 @@ namespace Clase6.EF.Entidades.Migrations
                         .IsRequired();
 
                     b.Navigation("Tematica");
-                });
-
-            modelBuilder.Entity("JugueteSucursal", b =>
-                {
-                    b.HasOne("Clase6.EF.Entidades.Juguete", null)
-                        .WithMany()
-                        .HasForeignKey("JuguetesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Clase6.EF.Entidades.Sucursal", null)
-                        .WithMany()
-                        .HasForeignKey("SucursalesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Tematica", b =>

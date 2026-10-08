@@ -16,7 +16,7 @@
         });
     </script>
 }
-@model IEnumerable<Clase6.EF.Entidades.Juguete>
+@model IEnumerable<JugueteViewModel>
 
 <h1>Juguetes</h1>
 <table class="table" id="tblJuguetes">
@@ -25,6 +25,7 @@
             <th>Nombre</th>
             <th>Precio</th>
             <th>Edad Recomendada</th>
+            <th>Tematica</th>
             <th>Eliminar</th>
         </tr>
     </thead>
@@ -35,6 +36,7 @@
                 <td><a href="/juguetes/editar/@juguete.Id">@juguete.Nombre</a></td>
                 <td>@juguete.Precio</td>
                 <td>@juguete.EdadRecomendada</td>
+                <td>@juguete.Tematica?.Nombre</td>
                 <td><a href="/juguetes/eliminar/@juguete.Id">Eliminar</a></td>
             </tr>
         }
