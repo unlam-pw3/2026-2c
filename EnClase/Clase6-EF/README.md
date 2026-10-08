@@ -1,3 +1,19 @@
+# Clase 7 - EF 1 a N y N a N
+## Qué hicimos
+- Agregamos relacion 1 a N Tematica con Juguete
+- Agregamos relacion N a N Sucursal con Juguete
+
+## Tarea
+
+Agrega una nueva entidad llamada `Libro` y entidad `Categoria` N a N en el namespace `Clase6.EF.Entidades` con las siguientes propiedades:
+
+- `int Id` (clave primaria)
+- `string Titulo`
+- `string Autor`
+- `int AnioPublicacion`
+
+
+
 # Clase6 - EF Core y Razor Pages
 
 ## Resumen de la solución
