@@ -12,6 +12,11 @@ public class JugueteViewModel
     public int TematicaId { get; set; }
     public Tematica? Tematica { get; set; }
 
+    public List<SucursalViewModel> Sucursales { get; set; } = new List<SucursalViewModel>();
+    public List<SucursalViewModel> SucursalesTodas { get; set; } = new List<SucursalViewModel>();
+    public List<int> SucursalesIds { get; set; } = new List<int>();
+
+
     public Juguete ToEntity()
     {
         return new Juguete
@@ -24,7 +29,7 @@ public class JugueteViewModel
         };
     }
 
-    public static JugueteViewModel FromEntity(Juguete juguete)
+    public static JugueteViewModel FromEntity(Juguete juguete, bool incluirSucursales = false)
     {
         return new JugueteViewModel
         {
@@ -33,7 +38,8 @@ public class JugueteViewModel
             Precio = juguete.Precio,
             EdadRecomendada = juguete.EdadRecomendada,
             TematicaId = juguete.TematicaId,
-            Tematica = juguete.Tematica
+            Tematica = juguete.Tematica,
+            Sucursales = incluirSucursales ? juguete.Sucursales.Select(s => SucursalViewModel.FromEntity(s, false)).ToList() : new List<SucursalViewModel>()
         };
     }
 }

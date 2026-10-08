@@ -14,6 +14,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IJuguetesLogica, JuguetesLogica>();
 builder.Services.AddScoped<ITematicaLogica, TematicaLogica>();
+builder.Services.AddScoped<ISucursalLogica, SucursalLogica>();
 
 //add JugueteriaDbContext
 builder.Services.AddDbContext<JugueteriaDbContext>();

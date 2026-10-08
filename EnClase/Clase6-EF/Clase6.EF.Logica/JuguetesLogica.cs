@@ -26,7 +26,7 @@ public class JuguetesLogica : IJuguetesLogica
 
     public Juguete? ObtenerPorId(int id)
     {
-        return db.Juguetes.FirstOrDefault(j => j.Id == id);
+        return db.Juguetes.Include(j=> j.Sucursales).FirstOrDefault(j => j.Id == id);
     }
 
     public void Agregar(Juguete juguete)

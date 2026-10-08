@@ -9,6 +9,7 @@ public class Juguete
     public int EdadRecomendada { get; set; }
     public int TematicaId { get; set; }
     public Tematica Tematica { get; set; }
+    public List<Sucursal> Sucursales { get; set; } = new List<Sucursal>();
 }
 
 //paso 1
