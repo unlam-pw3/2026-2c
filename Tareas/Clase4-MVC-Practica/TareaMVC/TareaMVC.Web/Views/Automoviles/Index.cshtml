@@ -1,0 +1,36 @@
+@model List<TareaMVC.Entidades.Automovil>
+
+<h1>Lista de Automóviles</h1>
+
+<a asp-action="Agregar" class="btn btn-primary mb-3">Agregar Automóvil</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Es Nuevo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var automovil in Model)
+        {
+            <tr>
+                <td>@automovil.Id</td>
+                <td>@automovil.Marca</td>
+                <td>@automovil.Modelo</td>
+                <td>@automovil.Anio</td>
+                <td>@(automovil.EsNuevo ? "Si" : "No")</td>
+                <td>
+                    <a asp-action="Actualizar" asp-route-id="@automovil.Id" class="btn btn-sm btn-warning">Actualizar</a>
+                    <form asp-action="Eliminar" asp-route-id="@automovil.Id" method="post" class="d-inline-block">
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar @automovil.Marca @automovil.Modelo?')">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
