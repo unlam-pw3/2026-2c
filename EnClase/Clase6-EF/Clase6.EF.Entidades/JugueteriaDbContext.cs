@@ -8,6 +8,8 @@ public class JugueteriaDbContext : DbContext
     public DbSet<Juguete> Juguetes { get; set; }
     public DbSet<Tematica> Tematicas { get; set; }
     public DbSet<Sucursal> Sucursales { get; set; }
+    public DbSet <Libro> Libros { get; set; }
+    public DbSet<Categoria> Categorias { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

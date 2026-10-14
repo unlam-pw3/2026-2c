@@ -21,6 +21,38 @@ namespace Clase6.EF.Entidades.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CategoriaLibro", b =>
+                {
+                    b.Property<int>("CategoriasId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LibrosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriasId", "LibrosId");
+
+                    b.HasIndex("LibrosId");
+
+                    b.ToTable("CategoriaLibro");
+                });
+
+            modelBuilder.Entity("Clase6.EF.Entidades.Categoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categorias");
+                });
+
             modelBuilder.Entity("Clase6.EF.Entidades.Juguete", b =>
                 {
                     b.Property<int>("Id")
@@ -47,6 +79,30 @@ namespace Clase6.EF.Entidades.Migrations
                     b.HasIndex("TematicaId");
 
                     b.ToTable("Juguetes");
+                });
+
+            modelBuilder.Entity("Clase6.EF.Entidades.Libro", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnioPublicacion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Autor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Titulo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Libros");
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Sucursal", b =>
@@ -104,6 +160,21 @@ namespace Clase6.EF.Entidades.Migrations
                     b.HasIndex("SucursalesId");
 
                     b.ToTable("JugueteSucursal");
+                });
+
+            modelBuilder.Entity("CategoriaLibro", b =>
+                {
+                    b.HasOne("Clase6.EF.Entidades.Categoria", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Clase6.EF.Entidades.Libro", null)
+                        .WithMany()
+                        .HasForeignKey("LibrosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Clase6.EF.Entidades.Juguete", b =>
