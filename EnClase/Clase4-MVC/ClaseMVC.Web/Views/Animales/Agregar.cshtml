@@ -13,21 +13,21 @@
 <form action="@Url.Action("Agregar", "Animales")" method="post">
     <div class="form-group">
         <label for="Raza">Raza</label>
-        <input asp-for="Raza" class="form-control" />
+        <input asp-for="Raza" class="form-control" required/>
         <span asp-validation-for="Raza" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="Peso">Peso</label>
-        <input asp-for="Peso" class="form-control" />
+        <input asp-for="Peso" class="form-control" required/>
         <span asp-validation-for="Peso" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="EdadEstimada">Edad Estimada</label>
-        <input asp-for="EdadEstimada" class="form-control" />
+        <input asp-for="EdadEstimada" class="form-control" required />
         <span asp-validation-for="EdadEstimada" class="text-danger"></span>
     </div>
     <div class="form-group form-check">
-        <input asp-for="EnExtincion" class="form-check-input" />
+        <input asp-for="EnExtincion" class="form-check-input" required/>
         <label class="form-check-label" for="EnExtincion">En Extinción</label>
     </div>
     <div>
@@ -50,7 +50,7 @@
 
      <div class="form-group form-check">
        <label for="ImagenUrl">Imagen</label>
-        <input asp-for="ImagenUrl" class="form-control" />
+        <input asp-for="ImagenUrl" class="form-control" required/>
         <span asp-validation-for="ImagenUrl" class="text-danger"></span>
     </div>
     
