@@ -2,6 +2,7 @@
 using Clase6.EF.Api.Dtos;
 using Clase6.EF.Entidades;
 using Clase6.EF.Logica;
+using Clase6.EF.Logica.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clase6.EF.Api.Controllers;
@@ -66,4 +67,40 @@ public class JuguetesController : ControllerBase
 
         return Created($"/api/juguetes/{juguete.Id}", result);
     }
+
+[HttpGet]
+public ActionResult<PagedResultDto<JugueteListItemDto>> Get([FromQuery] JugueteQueryDto query)
+{
+    var (items, totalCount) = _juguetesLogica.Buscar(new JugueteFiltro
+    {
+        Nombre = query.Nombre,
+        TematicaId = query.TematicaId,
+        PrecioMin = query.PrecioMin,
+        PrecioMax = query.PrecioMax,
+        SortBy = query.SortBy ?? "id",
+        SortDir = query.SortDir ?? "asc",
+        Page = query.Page,
+        PageSize = query.PageSize
+    });
+
+    var safePage = query.Page < 1 ? 1 : query.Page;
+    var safeSize = query.PageSize < 1 ? 10 : Math.Min(query.PageSize, 100);
+
+    return Ok(new PagedResultDto<JugueteListItemDto>
+    {
+        Page = safePage,
+        PageSize = safeSize,
+        TotalCount = totalCount,
+        TotalPages = (int)Math.Ceiling(totalCount / (double)safeSize),
+        Items = items.Select(j => new JugueteListItemDto
+        {
+            Id = j.Id,
+            Nombre = j.Nombre,
+            Precio = j.Precio,
+            EdadRecomendada = j.EdadRecomendada,
+            TematicaId = j.TematicaId,
+            TematicaNombre = j.Tematica?.Nombre
+        }).ToList()
+    });
+}
 }
