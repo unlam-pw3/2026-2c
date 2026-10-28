@@ -1,0 +1,30 @@
+@Clase6.EF.Api_HostAddress = https://localhost:7150
+
+GET {{Clase6.EF.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{Clase6.EF.Api_HostAddress}}/weatherforecast
+
+###
+
+GET {{Clase6.EF.Api_HostAddress}}/api/juguetes
+
+###
+
+POST {{Clase6.EF.Api_HostAddress}}/api/juguetes
+Content-Type: application/json
+
+{
+  "nombre": "Lego Star Wars X-Wing",
+  "precio": 15999.50,
+  "edadRecomendada": 8,
+  "tematicaId": 1 
+}
+
+###
+
+GET {{Clase6.EF.Api_HostAddress}}/api/juguetes
+
+###

@@ -5,6 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 public class JugueteriaDbContext : DbContext
 {
+    public JugueteriaDbContext(DbContextOptions<JugueteriaDbContext> options)
+       : base(options)
+    {
+    }
+
     public DbSet<Juguete> Juguetes { get; set; }
     public DbSet<Tematica> Tematicas { get; set; }
     public DbSet<TematicaLibro> TematicasLibro { get; set; }
@@ -15,7 +20,10 @@ public class JugueteriaDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer(
-            @"Server=.\SQLEXPRESS;Database=2026-2c-Jugueteria;Trusted_Connection=True;TrustServerCertificate=True");
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(
+            @"Server=.;Database=2026-2c-Jugueteria;Trusted_Connection=True;TrustServerCertificate=True");
+        }
     }
 }
