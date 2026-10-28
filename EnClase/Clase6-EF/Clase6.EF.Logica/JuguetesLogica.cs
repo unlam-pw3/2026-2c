@@ -9,6 +9,7 @@ public interface IJuguetesLogica
     void Agregar(Juguete juguete);
     void Eliminar(int id);
     List<Juguete> Obtener();
+    (IEnumerable<Juguete> items, int totalCount) ObtenerPaginado(int page, int pageSize);
     public Juguete? ObtenerPorId(int id);
 }
 
@@ -50,4 +51,16 @@ public class JuguetesLogica : IJuguetesLogica
         db.SaveChanges();
     }
 
+    public (IEnumerable<Juguete> items, int totalCount) ObtenerPaginado(int page, int pageSize)
+    {
+        db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        
+        var items = db.Juguetes
+            .Include(j => j.Tematica)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+        var totalCount = db.Juguetes.Count();
+        return (items, totalCount);
+    }
 }

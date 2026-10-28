@@ -6,9 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-using var db = new JugueteriaDbContext();
-db.Database.Migrate();
-
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -24,8 +21,15 @@ builder.Services.AddScoped<ILibroLogica, LibroLogica>();
 //add JugueteriaDbContext
 builder.Services.AddDbContext<JugueteriaDbContext>();
 
-
 var app = builder.Build();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<JugueteriaDbContext>();
+    db.Database.Migrate();
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
