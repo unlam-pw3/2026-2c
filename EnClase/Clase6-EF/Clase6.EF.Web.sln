@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase6.EF.Repositorios", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase6.EF.Api", "Clase6.EF.Api\Clase6.EF.Api.csproj", "{629CD0F5-5EEA-49F7-A2E4-8AA43F5AE599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase6.EF.Tests", "..\Clase6.EF.Tests\Clase6.E F\Clase6.EF.Tests.csproj", "{BE714CDA-EB88-4E22-80CF-9EC24B0FFCB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase6.EF.Tests", "Clase6.EF.Tests\Clase6.EF.Tests.csproj", "{BE714CDA-EB88-4E22-80CF-9EC24B0FFCB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
